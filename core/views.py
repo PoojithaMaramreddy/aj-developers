@@ -1,6 +1,12 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
-from .models import Project, Lead, SiteVisit, BookingRequest
+
+from .models import (
+    Project,
+    Lead,
+    SiteVisit,
+    BookingRequest,
+)
 
 
 def home(request):
@@ -63,27 +69,27 @@ def project_enquiry(request, slug):
 
         name = request.POST.get(
             "name",
-            ""
+            "",
         ).strip()
 
         phone = request.POST.get(
             "phone",
-            ""
+            "",
         ).strip()
 
         email = request.POST.get(
             "email",
-            ""
+            "",
         ).strip()
 
         interested_plot_id = request.POST.get(
             "interested_plot",
-            ""
+            "",
         ).strip()
 
         message = request.POST.get(
             "message",
-            ""
+            "",
         ).strip()
 
         whatsapp_opt_in = (
@@ -103,11 +109,6 @@ def project_enquiry(request, slug):
                 },
             )
 
-        # -------------------------------------------------
-        # Find the selected plot only
-        # if it belongs to this project.
-        # -------------------------------------------------
-
         interested_plot = None
 
         if interested_plot_id:
@@ -118,10 +119,7 @@ def project_enquiry(request, slug):
                 .first()
             )
 
-        # -------------------------------------------------
         # Find existing lead using phone + project
-        # -------------------------------------------------
-
         lead = (
             Lead.objects
             .filter(
@@ -132,12 +130,9 @@ def project_enquiry(request, slug):
             .first()
         )
 
-        # -------------------------------------------------
-        # Create new lead only if one does not exist
-        # -------------------------------------------------
-
         if not lead:
 
+            # Create a new lead
             Lead.objects.create(
                 name=name,
                 phone=phone,
@@ -152,10 +147,10 @@ def project_enquiry(request, slug):
 
         else:
 
-            # Update useful customer information
-            lead.name = name
+            # Existing lead:
+            # DO NOT change the existing name.
 
-            if email:
+            if email and not lead.email:
                 lead.email = email
 
             if interested_plot:
@@ -164,18 +159,11 @@ def project_enquiry(request, slug):
             if message:
                 lead.message = message
 
-            lead.whatsapp_opt_in = whatsapp_opt_in
+            if whatsapp_opt_in:
+                lead.whatsapp_opt_in = True
 
-            # IMPORTANT:
-            # Do not reset an existing lead's status.
-            # Example: if customer already has a site visit
-            # or follow-up, keep that progress.
-
+            # Do not reset existing lead status.
             lead.save()
-
-        # -------------------------------------------------
-        # Redirect after successful submission
-        # -------------------------------------------------
 
         return redirect(
             f"{reverse('project_detail', args=[project.slug])}"
@@ -187,6 +175,7 @@ def project_enquiry(request, slug):
         slug=project.slug,
     )
 
+
 def project_site_visit(request, slug):
 
     project = get_object_or_404(
@@ -197,23 +186,34 @@ def project_site_visit(request, slug):
 
     if request.method == "POST":
 
-        name = request.POST.get("name", "").strip()
-        phone = request.POST.get("phone", "").strip()
-        email = request.POST.get("email", "").strip()
+        name = request.POST.get(
+            "name",
+            "",
+        ).strip()
+
+        phone = request.POST.get(
+            "phone",
+            "",
+        ).strip()
+
+        email = request.POST.get(
+            "email",
+            "",
+        ).strip()
 
         preferred_date = request.POST.get(
             "preferred_date",
-            ""
+            "",
         ).strip()
 
         preferred_time = request.POST.get(
             "preferred_time",
-            ""
+            "",
         ).strip()
 
         message = request.POST.get(
             "message",
-            ""
+            "",
         ).strip()
 
         # Basic validation
@@ -229,10 +229,7 @@ def project_site_visit(request, slug):
                 },
             )
 
-        # -------------------------------------------------
         # Find existing lead using phone + project
-        # -------------------------------------------------
-
         lead = (
             Lead.objects
             .filter(
@@ -243,12 +240,9 @@ def project_site_visit(request, slug):
             .first()
         )
 
-        # -------------------------------------------------
-        # Create a new lead only if one does not exist
-        # -------------------------------------------------
-
         if not lead:
 
+            # Create a new lead
             lead = Lead.objects.create(
                 name=name,
                 phone=phone,
@@ -261,24 +255,20 @@ def project_site_visit(request, slug):
 
         else:
 
-            # Update useful customer information
-            lead.name = name
+            # Existing lead:
+            # DO NOT change the existing name.
 
-            if email:
+            if email and not lead.email:
                 lead.email = email
 
             if message:
                 lead.message = message
 
-            # Move lead into site-visit stage
             lead.status = "SITE_VISIT_SCHEDULED"
 
             lead.save()
 
-        # -------------------------------------------------
-        # Create site visit request
-        # -------------------------------------------------
-
+        # Create site visit against the existing lead
         SiteVisit.objects.create(
             lead=lead,
             project=project,
@@ -298,6 +288,7 @@ def project_site_visit(request, slug):
         slug=project.slug,
     )
 
+
 def project_booking_request(request, slug):
 
     project = get_object_or_404(
@@ -308,11 +299,27 @@ def project_booking_request(request, slug):
 
     if request.method == "POST":
 
-        name = request.POST.get("name", "").strip()
-        phone = request.POST.get("phone", "").strip()
-        email = request.POST.get("email", "").strip()
-        message = request.POST.get("message", "").strip()
+        name = request.POST.get(
+            "name",
+            "",
+        ).strip()
 
+        phone = request.POST.get(
+            "phone",
+            "",
+        ).strip()
+
+        email = request.POST.get(
+            "email",
+            "",
+        ).strip()
+
+        message = request.POST.get(
+            "message",
+            "",
+        ).strip()
+
+        # Basic validation
         if not name or not phone:
 
             return render(
@@ -325,10 +332,7 @@ def project_booking_request(request, slug):
                 },
             )
 
-        # -------------------------------------------------
-        # DUPLICATE LEAD HANDLING
-        # -------------------------------------------------
-
+        # Find existing lead using phone + project
         lead = (
             Lead.objects
             .filter(
@@ -341,6 +345,7 @@ def project_booking_request(request, slug):
 
         if not lead:
 
+            # Create a new lead
             lead = Lead.objects.create(
                 name=name,
                 phone=phone,
@@ -353,24 +358,20 @@ def project_booking_request(request, slug):
 
         else:
 
-            lead.name = name
+            # Existing lead:
+            # DO NOT change the existing name.
 
-            if email:
+            if email and not lead.email:
                 lead.email = email
 
             if message:
                 lead.message = message
 
-            # Do not create another Lead.
-            # Update the existing lead instead.
             lead.status = "BOOKING_REQUESTED"
 
             lead.save()
 
-        # -------------------------------------------------
-        # DUPLICATE BOOKING REQUEST HANDLING
-        # -------------------------------------------------
-
+        # Check whether this lead already has a booking request
         existing_booking = (
             BookingRequest.objects
             .filter(
@@ -387,10 +388,7 @@ def project_booking_request(request, slug):
                 "?booking=already_requested"
             )
 
-        # -------------------------------------------------
-        # CREATE BOOKING REQUEST
-        # -------------------------------------------------
-
+        # Create booking request
         BookingRequest.objects.create(
             lead=lead,
             project=project,
