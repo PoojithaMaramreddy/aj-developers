@@ -75,32 +75,118 @@
 
     <!-- Main Content -->
     <main>
+
         {% block content %}
         {% endblock %}
+
     </main>
 
 
     <!-- Footer -->
     <footer>
+
         <div class="container">
+
             <p>
                 © {% now "Y" %} AJ Developers.
                 Developing Spaces, Enriching Lives.
             </p>
+
         </div>
+
     </footer>
 
+
+    <!-- Header Scroll Behaviour -->
     <script>
         window.addEventListener("scroll", function () {
+
             const header = document.querySelector(".site-header");
+
+            if (!header) return;
 
             if (window.scrollY > 60) {
                 header.classList.add("scrolled");
             } else {
                 header.classList.remove("scrolled");
             }
+
         });
     </script>
 
+
+    <!-- Subtle Cursor / Tap Sparkles -->
+    <script>
+        (() => {
+
+            let lastSparkleTime = 0;
+
+            function createSparkle(x, y) {
+
+                const now = Date.now();
+
+                // Prevent too many sparkles
+                if (now - lastSparkleTime < 70) {
+                    return;
+                }
+
+                lastSparkleTime = now;
+
+                const sparkle = document.createElement("span");
+
+                sparkle.className = "cursor-sparkle";
+
+                sparkle.style.left = `${x}px`;
+                sparkle.style.top = `${y}px`;
+
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 700);
+
+            }
+
+
+            // Laptop / Desktop
+            document.addEventListener("pointermove", function (event) {
+
+                if (event.pointerType === "mouse") {
+
+                    createSparkle(
+                        event.clientX,
+                        event.clientY
+                    );
+
+                }
+
+            });
+
+
+            // Phone / Tablet tap
+            document.addEventListener("pointerdown", function (event) {
+
+                if (
+                    event.pointerType === "touch" ||
+                    event.pointerType === "pen"
+                ) {
+
+                    createSparkle(
+                        event.clientX,
+                        event.clientY
+                    );
+
+                }
+
+            });
+
+        })();
+    </script>
+
+
+    {% block extra_js %}
+    {% endblock %}
+
 </body>
+
 </html>

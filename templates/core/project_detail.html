@@ -8,6 +8,7 @@
 {{ project.meta_description|default:project.description }}
 {% endblock %}
 
+
 {% block content %}
 
 
@@ -17,23 +18,175 @@
 
 <section class="project-detail-hero">
 
-    <div class="container">
+    {% if project.layout_image %}
 
-        <p class="project-type">
-            {{ project.get_property_type_display }}
-        </p>
+        <div class="project-detail-hero-image">
 
-        <h1>
-            {{ project.name }}
-        </h1>
+            <img
+                src="{{ project.layout_image.url }}"
+                alt="{{ project.name }}"
+            >
 
-        <p class="project-location">
-            {{ project.location }}
-        </p>
+        </div>
+
+    {% endif %}
+
+
+    <div class="project-detail-hero-overlay"></div>
+
+
+    <div class="container project-detail-hero-content">
+
+        <div class="project-hero-text">
+
+            <p class="project-type">
+                {{ project.get_property_type_display }}
+            </p>
+
+            <h1>
+                {{ project.name }}
+            </h1>
+
+            <p class="project-location">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                {{ project.location }}
+
+            </p>
+
+        </div>
 
     </div>
 
 </section>
+
+
+
+<!-- =========================================================
+     QUICK PROJECT INFORMATION
+     ========================================================= -->
+
+<section class="project-quick-info">
+
+    <div class="container">
+
+        <div class="project-quick-grid">
+
+
+            {% if project.total_area %}
+
+                <div class="quick-info-card">
+
+                    <div class="quick-info-icon">
+
+                        <i class="fa-solid fa-ruler-combined"></i>
+
+                    </div>
+
+                    <div class="quick-info-content">
+
+                        <span>
+                            Total Area
+                        </span>
+
+                        <strong>
+                            {{ project.total_area }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+
+            {% if project.total_plots %}
+
+                <div class="quick-info-card">
+
+                    <div class="quick-info-icon">
+
+                        <i class="fa-solid fa-layer-group"></i>
+
+                    </div>
+
+                    <div class="quick-info-content">
+
+                        <span>
+                            Total Plots
+                        </span>
+
+                        <strong>
+                            {{ project.total_plots }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+
+            {% if project.property_type %}
+
+                <div class="quick-info-card">
+
+                    <div class="quick-info-icon">
+
+                        <i class="fa-solid fa-building"></i>
+
+                    </div>
+
+                    <div class="quick-info-content">
+
+                        <span>
+                            Property Type
+                        </span>
+
+                        <strong>
+                            {{ project.get_property_type_display }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+
+            <div class="quick-info-card">
+
+                <div class="quick-info-icon">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+                <div class="quick-info-content">
+
+                    <span>
+                        Project Status
+                    </span>
+
+                    <strong>
+                        Published
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
 
 
 <!-- =========================================================
@@ -44,30 +197,46 @@
 
     <div class="container">
 
-        <h2>
-            Project Overview
-        </h2>
+        <div class="section-heading">
 
-        {% if project.description %}
-
-            <p>
-                {{ project.description }}
+            <p class="section-label">
+                About The Project
             </p>
 
-        {% endif %}
+            <h2>
+                Project Overview
+            </h2>
+
+        </div>
 
 
-        {% if project.location_description %}
+        <div class="overview-content">
 
-            <p>
-                {{ project.location_description }}
-            </p>
 
-        {% endif %}
+            {% if project.description %}
+
+                <p>
+                    {{ project.description }}
+                </p>
+
+            {% endif %}
+
+
+            {% if project.location_description %}
+
+                <p>
+                    {{ project.location_description }}
+                </p>
+
+            {% endif %}
+
+
+        </div>
 
     </div>
 
 </section>
+
 
 
 <!-- =========================================================
@@ -76,62 +245,39 @@
 
 {% if project.highlights %}
 
-<section class="project-section">
+<section class="project-section highlights-section">
 
     <div class="container">
 
-        <h2>
-            Project Highlights
-        </h2>
+        <div class="section-heading">
 
-        <p>
-            {{ project.highlights }}
-        </p>
+            <p class="section-label">
+                Why This Project
+            </p>
 
-    </div>
+            <h2>
+                Project Highlights
+            </h2>
 
-</section>
-
-{% endif %}
+        </div>
 
 
-<!-- =========================================================
-     AMENITIES
-     ========================================================= -->
+        <div class="highlight-box">
 
-{% if project.amenities.all %}
+            <div class="highlight-icon">
 
-<section class="project-section">
+                <i class="fa-solid fa-star"></i>
 
-    <div class="container">
-
-        <h2>
-            Amenities
-        </h2>
+            </div>
 
 
-        <div class="amenities-grid">
+            <div class="highlight-content">
 
-            {% for amenity in project.amenities.all %}
+                <p>
+                    {{ project.highlights }}
+                </p>
 
-                <div class="amenity-card">
-
-                    <h3>
-                        {{ amenity.name }}
-                    </h3>
-
-
-                    {% if amenity.description %}
-
-                        <p>
-                            {{ amenity.description }}
-                        </p>
-
-                    {% endif %}
-
-                </div>
-
-            {% endfor %}
+            </div>
 
         </div>
 
@@ -142,61 +288,188 @@
 {% endif %}
 
 
+
+<!-- =========================================================
+     AMENITIES
+     ========================================================= -->
+
+{% if project.amenities.all %}
+
+<section class="project-section amenities-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                Project Features
+            </p>
+
+            <h2>
+                Amenities
+            </h2>
+
+        </div>
+
+
+        <div class="amenities-grid">
+
+
+            {% for amenity in project.amenities.all %}
+
+                <div class="amenity-card">
+
+                    <div class="amenity-icon">
+
+                        <i class="fa-solid fa-check"></i>
+
+                    </div>
+
+
+                    <div class="amenity-content">
+
+                        <h3>
+                            {{ amenity.name }}
+                        </h3>
+
+
+                        {% if amenity.description %}
+
+                            <p>
+                                {{ amenity.description }}
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+
 <!-- =========================================================
      LOCATION
      ========================================================= -->
 
-<section class="project-section">
+<section class="project-section location-detail-section">
 
     <div class="container">
 
-        <h2>
-            Location
-        </h2>
+        <div class="section-heading">
 
-        <p>
-            {{ project.location }}
-        </p>
+            <p class="section-label">
+                Connectivity
+            </p>
+
+            <h2>
+                Location
+            </h2>
+
+        </div>
 
 
-        {% if project.google_maps_url %}
+        <div class="location-detail-box">
 
-            <a
-                href="{{ project.google_maps_url }}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn"
-            >
-                View on Google Maps
-            </a>
 
-        {% endif %}
+            <div class="location-detail-icon">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+            </div>
+
+
+            <div class="location-detail-content">
+
+                <h3>
+                    {{ project.location }}
+                </h3>
+
+
+                {% if project.location_description %}
+
+                    <p>
+                        {{ project.location_description }}
+                    </p>
+
+                {% endif %}
+
+
+                {% if project.google_maps_url %}
+
+                    <a
+                        href="{{ project.google_maps_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn"
+                    >
+
+                        <i class="fa-solid fa-map-location-dot"></i>
+
+                        View on Google Maps
+
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+
+        </div>
 
     </div>
 
 </section>
 
 
+
 <!-- =========================================================
-     APPROVALS & LEGAL INFORMATION
+     APPROVALS & LEGAL
      ========================================================= -->
 
 {% if project.approvals.all %}
 
-<section class="project-section">
+<section class="project-section approvals-section">
 
     <div class="container">
 
-        <h2>
-            Approvals & Legal Information
-        </h2>
+        <div class="section-heading">
+
+            <p class="section-label">
+                Trust & Compliance
+            </p>
+
+            <h2>
+                Approvals & Legal Information
+            </h2>
+
+        </div>
 
 
         <div class="approval-list">
 
+
             {% for approval in project.approvals.all %}
 
                 <div class="approval-card">
+
+
+                    <div class="approval-icon">
+
+                        <i class="fa-solid fa-certificate"></i>
+
+                    </div>
+
 
                     <h3>
                         {{ approval.approval_type }}
@@ -248,15 +521,22 @@
                             href="{{ approval.document.url }}"
                             target="_blank"
                             rel="noopener noreferrer"
+                            class="approval-link"
                         >
+
                             View Document
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
                         </a>
 
                     {% endif %}
 
+
                 </div>
 
             {% endfor %}
+
 
         </div>
 
@@ -265,6 +545,7 @@
 </section>
 
 {% endif %}
+
 
 
 <!-- =========================================================
@@ -273,38 +554,80 @@
 
 {% if project.images.all %}
 
-<section class="project-section">
+<section class="project-section gallery-section">
 
     <div class="container">
 
-        <h2>
-            Gallery
-        </h2>
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                Explore The Project
+            </p>
+
+            <h2>
+                Gallery
+            </h2>
+
+            <p>
+                Explore project images and tap any image to view it larger.
+            </p>
+
+        </div>
+
 
 
         <div class="gallery-grid">
 
+
             {% for image in project.images.all %}
 
-                <figure class="gallery-item">
+                <button
+                    type="button"
+                    class="gallery-item"
+                    data-gallery-image="{{ image.image.url }}"
+                    data-gallery-title="{{ image.title|default:project.name }}"
+                    aria-label="View {{ image.title|default:project.name }} image"
+                >
 
-                    <img
-                        src="{{ image.image.url }}"
-                        alt="{{ image.title|default:project.name }}"
-                    >
+
+                    <div class="gallery-image-wrapper">
+
+                        <img
+                            src="{{ image.image.url }}"
+                            alt="{{ image.title|default:project.name }}"
+                            loading="lazy"
+                            decoding="async"
+                        >
+
+
+                        <div class="gallery-overlay">
+
+                            <span class="gallery-zoom-icon">
+
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
 
 
                     {% if image.caption %}
 
-                        <figcaption>
+                        <span class="gallery-caption">
                             {{ image.caption }}
-                        </figcaption>
+                        </span>
 
                     {% endif %}
 
-                </figure>
+
+                </button>
 
             {% endfor %}
+
 
         </div>
 
@@ -315,26 +638,96 @@
 {% endif %}
 
 
+
 <!-- =========================================================
-     VIDEOS
+     GALLERY LIGHTBOX / SAME PAGE IMAGE VIEW
+     ========================================================= -->
+
+<div
+    class="gallery-lightbox"
+    id="galleryLightbox"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Project image viewer"
+>
+
+
+    <button
+        type="button"
+        class="gallery-lightbox-close"
+        id="galleryLightboxClose"
+        aria-label="Close image viewer"
+    >
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+
+
+    <div class="gallery-lightbox-content">
+
+
+        <img
+            src=""
+            alt=""
+            id="galleryLightboxImage"
+        >
+
+
+        <p
+            id="galleryLightboxCaption"
+            class="gallery-lightbox-caption"
+        ></p>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     PROJECT VIDEOS
      ========================================================= -->
 
 {% if project.videos.all %}
 
-<section class="project-section">
+<section class="project-section videos-section">
 
     <div class="container">
 
-        <h2>
-            Videos
-        </h2>
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                Watch
+            </p>
+
+            <h2>
+                Project Videos
+            </h2>
+
+        </div>
+
 
 
         <div class="video-list">
 
+
             {% for video in project.videos.all %}
 
                 <div class="video-card">
+
+
+                    <div class="video-card-icon">
+
+                        <i class="fa-brands fa-youtube"></i>
+
+                    </div>
+
 
                     <h3>
                         {{ video.title }}
@@ -356,12 +749,18 @@
                         rel="noopener noreferrer"
                         class="btn"
                     >
+
+                        <i class="fa-brands fa-youtube"></i>
+
                         Watch Video
+
                     </a>
+
 
                 </div>
 
             {% endfor %}
+
 
         </div>
 
@@ -373,25 +772,58 @@
 
 
 <!-- =========================================================
-     LAYOUT
+     PROJECT LAYOUT
      ========================================================= -->
 
-{% if project.layout_image %}
+{% if project.layout_pdf %}
 
-<section class="project-section">
+<section class="project-section layout-section">
 
     <div class="container">
 
-        <h2>
-            Layout
-        </h2>
+        <div class="layout-box">
 
+            <div class="layout-icon">
 
-        <img
-            src="{{ project.layout_image.url }}"
-            alt="{{ project.name }} layout"
-            class="layout-image"
-        >
+                <i class="fa-solid fa-file-pdf"></i>
+
+            </div>
+
+            <div class="layout-content">
+
+                <p class="section-label">
+                    Project Layout
+                </p>
+
+                <h2>
+                    {{ project.name }} Layout
+                </h2>
+
+                <p>
+                    View the complete project layout document
+                    for detailed project information.
+                </p>
+
+            </div>
+
+            <div class="layout-action">
+
+                <a
+                    href="{{ project.layout_pdf.url }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn"
+                >
+
+                    <i class="fa-solid fa-map"></i>
+
+                    View Layout
+
+                </a>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -406,29 +838,62 @@
 
 {% if project.brochure %}
 
-<section class="project-section">
+<section class="project-section brochure-section">
 
     <div class="container">
 
-        <h2>
-            Project Brochure
-        </h2>
+
+        <div class="brochure-box">
 
 
-        <a
-            href="{{ project.brochure.url }}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn"
-        >
-            View Brochure
-        </a>
+            <div class="brochure-icon">
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+            </div>
+
+
+
+            <div class="brochure-content">
+
+                <p class="section-label">
+                    Project Information
+                </p>
+
+                <h2>
+                    Project Brochure
+                </h2>
+
+                <p>
+                    View the complete project brochure for more information.
+                </p>
+
+            </div>
+
+
+
+            <a
+                href="{{ project.brochure.url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn"
+            >
+
+                <i class="fa-solid fa-book-open"></i>
+
+                View Brochure
+
+            </a>
+
+
+        </div>
 
     </div>
 
 </section>
 
 {% endif %}
+
 
 
 <!-- =========================================================
@@ -461,13 +926,23 @@
         </div>
 
 
+
         {% if request.GET.enquiry == "success" %}
 
+
             <div class="enquiry-success">
+
+                <div class="success-icon">
+
+                    <i class="fa-solid fa-check"></i>
+
+                </div>
+
 
                 <h3>
                     Thank you for your enquiry.
                 </h3>
+
 
                 <p>
                     Your enquiry has been received.
@@ -475,6 +950,7 @@
                 </p>
 
             </div>
+
 
         {% else %}
 
@@ -488,6 +964,7 @@
             {% endif %}
 
 
+
             <form
                 method="post"
                 action="{% url 'project_enquiry' project.slug %}"
@@ -499,8 +976,6 @@
 
                 <div class="form-grid">
 
-
-                    <!-- Name -->
 
                     <div class="form-group">
 
@@ -520,7 +995,6 @@
                     </div>
 
 
-                    <!-- Phone -->
 
                     <div class="form-group">
 
@@ -540,7 +1014,6 @@
                     </div>
 
 
-                    <!-- Email -->
 
                     <div class="form-group">
 
@@ -559,7 +1032,6 @@
                     </div>
 
 
-                    <!-- Message -->
 
                     <div class="form-group form-group-full">
 
@@ -577,7 +1049,6 @@
                     </div>
 
 
-                    <!-- WhatsApp Permission -->
 
                     <div class="form-group form-group-full">
 
@@ -597,52 +1068,76 @@
 
                     </div>
 
+
                 </div>
+
 
 
                 <button
                     type="submit"
                     class="btn"
                 >
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
                     Submit Enquiry
+
                 </button>
 
+
             </form>
+
 
         {% endif %}
 
 
-        <!-- Direct Contact -->
 
         <div class="enquiry-direct-contact">
+
 
             <p>
                 Prefer to contact us directly?
             </p>
 
 
-            <a
-                href="tel:+918977914586"
-                class="btn"
-            >
-                Call AJ Developers
-            </a>
+            <div class="direct-contact-buttons">
 
 
-            <a
-                href="https://wa.me/918977914586?text=Hi%20AJ%20Developers%2C%20I%20am%20interested%20in%20{{ project.name|urlencode }}."
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn"
-            >
-                WhatsApp Us
-            </a>
+                <a
+                    href="tel:+918977914586"
+                    class="btn"
+                >
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    Call AJ Developers
+
+                </a>
+
+
+                <a
+                    href="https://wa.me/918977914586?text=Hi%20AJ%20Developers%2C%20I%20am%20interested%20in%20{{ project.name|urlencode }}."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn"
+                >
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                    WhatsApp Us
+
+                </a>
+
+
+            </div>
 
         </div>
+
 
     </div>
 
 </section>
+
 
 
 <!-- =========================================================
@@ -676,13 +1171,23 @@
         </div>
 
 
+
         {% if request.GET.site_visit == "success" %}
 
+
             <div class="enquiry-success">
+
+                <div class="success-icon">
+
+                    <i class="fa-solid fa-calendar-check"></i>
+
+                </div>
+
 
                 <h3>
                     Site visit request received.
                 </h3>
+
 
                 <p>
                     Thank you. AJ Developers will contact you shortly
@@ -690,6 +1195,7 @@
                 </p>
 
             </div>
+
 
         {% else %}
 
@@ -703,6 +1209,7 @@
             {% endif %}
 
 
+
             <form
                 method="post"
                 action="{% url 'project_site_visit' project.slug %}"
@@ -714,8 +1221,6 @@
 
                 <div class="form-grid">
 
-
-                    <!-- Name -->
 
                     <div class="form-group">
 
@@ -735,7 +1240,6 @@
                     </div>
 
 
-                    <!-- Phone -->
 
                     <div class="form-group">
 
@@ -755,7 +1259,6 @@
                     </div>
 
 
-                    <!-- Email -->
 
                     <div class="form-group">
 
@@ -774,7 +1277,6 @@
                     </div>
 
 
-                    <!-- Preferred Date -->
 
                     <div class="form-group">
 
@@ -792,7 +1294,6 @@
                     </div>
 
 
-                    <!-- Preferred Time -->
 
                     <div class="form-group">
 
@@ -809,7 +1310,6 @@
                     </div>
 
 
-                    <!-- Message -->
 
                     <div class="form-group form-group-full">
 
@@ -826,23 +1326,226 @@
 
                     </div>
 
+
                 </div>
+
 
 
                 <button
                     type="submit"
                     class="btn"
                 >
+
+                    <i class="fa-regular fa-calendar"></i>
+
                     Request Site Visit
+
                 </button>
+
 
             </form>
 
+
         {% endif %}
+
 
     </div>
 
 </section>
+
+
+
+<!-- =========================================================
+     BOOKING REQUEST
+     ========================================================= -->
+
+<section
+    class="project-cta booking-section"
+    id="booking"
+>
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                Booking Request
+            </p>
+
+            <h2>
+                Request to Book
+            </h2>
+
+            <p>
+                Interested in this project?
+                Submit your details and our team will contact you
+                to discuss the next steps.
+            </p>
+
+        </div>
+
+
+
+        {% if request.GET.booking == "success" %}
+
+
+            <div class="form-success">
+
+                <div class="success-icon">
+
+                    <i class="fa-solid fa-check"></i>
+
+                </div>
+
+                <p>
+                    Your booking request has been received.
+                    Our team will contact you shortly.
+                </p>
+
+            </div>
+
+
+        {% elif request.GET.booking == "already_requested" %}
+
+
+            <div class="form-success">
+
+                <div class="success-icon">
+
+                    <i class="fa-solid fa-check"></i>
+
+                </div>
+
+                <p>
+                    Your booking request has already been received.
+                    Our team will contact you shortly.
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+
+        {% if booking_error %}
+
+            <div class="form-error">
+                {{ booking_error }}
+            </div>
+
+        {% endif %}
+
+
+
+        <form
+            method="post"
+            action="{% url 'project_booking_request' project.slug %}"
+            class="enquiry-form"
+        >
+
+            {% csrf_token %}
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label for="booking-name">
+                        Name *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="booking-name"
+                        name="name"
+                        placeholder="Your name"
+                        required
+                        autocomplete="name"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="booking-phone">
+                        Phone Number *
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="booking-phone"
+                        name="phone"
+                        placeholder="Your phone number"
+                        required
+                        autocomplete="tel"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="booking-email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="booking-email"
+                        name="email"
+                        placeholder="Your email address"
+                        autocomplete="email"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group form-group-full">
+
+                    <label for="booking-message">
+                        Message
+                    </label>
+
+                    <textarea
+                        id="booking-message"
+                        name="message"
+                        rows="4"
+                        placeholder="Any questions or requirements?"
+                    ></textarea>
+
+                </div>
+
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+                Submit Booking Request
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+</section>
+
 
 
 <!-- =========================================================
@@ -851,8 +1554,6 @@
 
 <div class="mobile-fixed-cta">
 
-
-    <!-- Call -->
 
     <a
         href="tel:+918977914586"
@@ -869,7 +1570,6 @@
     </a>
 
 
-    <!-- WhatsApp -->
 
     <a
         href="https://wa.me/918977914586?text=Hi%20AJ%20Developers%2C%20I%20am%20interested%20in%20{{ project.name|urlencode }}."
@@ -888,7 +1588,6 @@
     </a>
 
 
-    <!-- Site Visit -->
 
     <a
         href="#site-visit"
@@ -904,176 +1603,222 @@
 
     </a>
 
+
 </div>
 
 
+
+{% endblock %}
+
+
+
 <!-- =========================================================
-     BOOKING REQUEST
+     GALLERY JAVASCRIPT
      ========================================================= -->
 
-<section
-    class="project-cta booking-section"
-    id="booking"
->
+{% block extra_js %}
 
-    <div class="container">
+<script>
 
-
-        <div class="section-heading">
-
-            <p class="section-label">
-                BOOKING REQUEST
-            </p>
-
-            <h2>
-                Request to Book
-            </h2>
-
-            <p>
-                Interested in this project?
-                Submit your details and our team will contact you
-                to discuss the next steps.
-            </p>
-
-        </div>
+document.addEventListener("DOMContentLoaded", function () {
 
 
-        <!-- Booking Success -->
+    /* =====================================================
+       GALLERY LIGHTBOX
+       ===================================================== */
 
-        {% if request.GET.booking == "success" %}
+    const galleryItems =
+        document.querySelectorAll(".gallery-item");
 
-            <div class="form-success">
+    const lightbox =
+        document.getElementById("galleryLightbox");
 
-                Your booking request has been received.
-                Our team will contact you shortly.
+    const lightboxImage =
+        document.getElementById("galleryLightboxImage");
 
-            </div>
+    const lightboxCaption =
+        document.getElementById("galleryLightboxCaption");
 
-
-        <!-- Booking Already Requested -->
-
-        {% elif request.GET.booking == "already_requested" %}
-
-            <div class="form-success">
-
-                Your booking request has already been received.
-                Our team will contact you shortly.
-
-            </div>
-
-        {% endif %}
+    const closeButton =
+        document.getElementById("galleryLightboxClose");
 
 
-        <!-- Booking Error -->
-
-        {% if booking_error %}
-
-            <div class="form-error">
-                {{ booking_error }}
-            </div>
-
-        {% endif %}
-
-
-        <!-- Booking Form -->
-
-        <form
-            method="post"
-            action="{% url 'project_booking_request' project.slug %}"
-            class="enquiry-form"
-        >
-
-            {% csrf_token %}
+    if (
+        !galleryItems.length ||
+        !lightbox ||
+        !lightboxImage ||
+        !closeButton
+    ) {
+        return;
+    }
 
 
-            <!-- Name -->
-
-            <div class="form-group">
-
-                <label for="booking-name">
-                    Name
-                </label>
-
-                <input
-                    type="text"
-                    id="booking-name"
-                    name="name"
-                    placeholder="Your name"
-                    required
-                >
-
-            </div>
+    let activeGalleryItem = null;
 
 
-            <!-- Phone -->
 
-            <div class="form-group">
+    /* =====================================================
+       OPEN LIGHTBOX
+       ===================================================== */
 
-                <label for="booking-phone">
-                    Phone Number
-                </label>
+    function openLightbox(item) {
 
-                <input
-                    type="tel"
-                    id="booking-phone"
-                    name="phone"
-                    placeholder="Your phone number"
-                    required
-                >
+        const imageUrl =
+            item.getAttribute("data-gallery-image");
 
-            </div>
+        const imageTitle =
+            item.getAttribute("data-gallery-title") || "";
 
 
-            <!-- Email -->
-
-            <div class="form-group">
-
-                <label for="booking-email">
-                    Email
-                </label>
-
-                <input
-                    type="email"
-                    id="booking-email"
-                    name="email"
-                    placeholder="Your email address"
-                >
-
-            </div>
+        if (!imageUrl) {
+            return;
+        }
 
 
-            <!-- Message -->
-
-            <div class="form-group">
-
-                <label for="booking-message">
-                    Message
-                </label>
-
-                <textarea
-                    id="booking-message"
-                    name="message"
-                    rows="4"
-                    placeholder="Any questions or requirements?"
-                ></textarea>
-
-            </div>
+        activeGalleryItem = item;
 
 
-            <!-- Submit -->
+        lightboxImage.src =
+            imageUrl;
 
-            <button
-                type="submit"
-                class="btn btn-primary"
-            >
-                Submit Booking Request
-            </button>
+        lightboxImage.alt =
+            imageTitle;
 
-        </form>
+        lightboxCaption.textContent =
+            imageTitle;
 
-    </div>
 
-</section>
+        lightbox.classList.add("active");
 
+        lightbox.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        document.body.classList.add(
+            "lightbox-open"
+        );
+
+
+        closeButton.focus();
+
+    }
+
+
+
+    /* =====================================================
+       CLOSE LIGHTBOX
+       ===================================================== */
+
+    function closeLightbox() {
+
+        lightbox.classList.remove(
+            "active"
+        );
+
+        lightbox.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        document.body.classList.remove(
+            "lightbox-open"
+        );
+
+
+        lightboxImage.src = "";
+
+        lightboxCaption.textContent = "";
+
+
+        if (activeGalleryItem) {
+
+            activeGalleryItem.focus();
+
+            activeGalleryItem = null;
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       GALLERY CLICK
+       ===================================================== */
+
+    galleryItems.forEach(function (item) {
+
+        item.addEventListener(
+            "click",
+            function () {
+
+                openLightbox(item);
+
+            }
+        );
+
+    });
+
+
+
+    /* =====================================================
+       CLOSE BUTTON
+       ===================================================== */
+
+    closeButton.addEventListener(
+        "click",
+        closeLightbox
+    );
+
+
+
+    /* =====================================================
+       CLOSE WHEN CLICKING BACKDROP
+       ===================================================== */
+
+    lightbox.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target === lightbox
+            ) {
+
+                closeLightbox();
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       ESC KEY
+       ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape" &&
+                lightbox.classList.contains("active")
+            ) {
+
+                closeLightbox();
+
+            }
+
+        }
+    );
+
+
+});
+
+</script>
 
 {% endblock %}

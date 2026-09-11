@@ -166,30 +166,19 @@ AJ Developers | Developing Spaces, Enriching Lives.
      FEATURED PROJECTS
      ========================================================= -->
 
-<section class="projects-section">
-
+<section class="featured-projects" id="projects">
     <div class="container">
 
         <div class="section-heading">
-
-            <p class="section-label">
-                Our Projects
-            </p>
-
-            <h2>
-                Featured Projects
-            </h2>
-
+            <span class="section-label">Our Projects</span>
+            <h2>Featured Projects</h2>
             <p>
-                Explore our thoughtfully planned real estate projects
-                across Hyderabad and surrounding areas.
+                Explore thoughtfully planned real estate opportunities
+                presented by AJ Developers.
             </p>
-
         </div>
 
-
         {% if projects %}
-
         <div class="project-grid">
 
             {% for project in projects|slice:":6" %}
@@ -197,44 +186,48 @@ AJ Developers | Developing Spaces, Enriching Lives.
             <article class="project-card">
 
                 {% if project.layout_image %}
-
-                <img
-                    src="{{ project.layout_image.url }}"
-                    alt="{{ project.name }}"
+                <a
+                    href="{% url 'project_detail' project.slug %}"
+                    class="project-card-image-link"
+                    aria-label="View {{ project.name }}"
                 >
-
+                    <img
+                        src="{{ project.layout_image.url }}"
+                        alt="{{ project.name }}"
+                        class="project-card-image"
+                    >
+                </a>
                 {% endif %}
-
 
                 <div class="project-card-content">
 
-                    <p class="project-type">
+                    <span class="project-type-badge">
                         {{ project.get_property_type_display }}
-                    </p>
+                    </span>
 
-                    <h3>
-                        {{ project.name }}
-                    </h3>
+                    <h2>
+                        <a href="{% url 'project_detail' project.slug %}">
+                            {{ project.name }}
+                        </a>
+                    </h2>
 
                     <p class="project-location">
+                        <i class="fa-solid fa-location-dot"></i>
                         {{ project.location }}
                     </p>
 
-
                     {% if project.description %}
-
                     <p>
-                        {{ project.description|truncatewords:20 }}
+                        {{ project.description|truncatewords:22 }}
                     </p>
-
                     {% endif %}
-
 
                     <a
                         href="{% url 'project_detail' project.slug %}"
                         class="btn"
                     >
                         View Project
+                        <i class="fa-solid fa-arrow-right"></i>
                     </a>
 
                 </div>
@@ -245,31 +238,25 @@ AJ Developers | Developing Spaces, Enriching Lives.
 
         </div>
 
-
-        <div class="section-action">
-
-            <a
-                href="{% url 'projects' %}"
-                class="btn"
-            >
-                View All Projects
-            </a>
-
-        </div>
-
+        <a
+            href="{% url 'projects' %}"
+            class="btn btn-outline projects-view-all"
+        >
+            View All Projects
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
 
         {% else %}
 
-        <p>
-            Our projects will be available here soon.
-        </p>
+        <div class="empty-projects">
+            <i class="fa-regular fa-building"></i>
+            <p>Projects will be listed here soon.</p>
+        </div>
 
         {% endif %}
 
     </div>
-
 </section>
-
 
 <!-- =========================================================
      WHY AJ DEVELOPERS
@@ -365,33 +352,68 @@ AJ Developers | Developing Spaces, Enriching Lives.
      LOCATION & CONNECTIVITY
      ========================================================= -->
 
-<section class="project-section">
-
+<section class="location-section">
     <div class="container">
 
         <div class="section-heading">
+            <span class="section-eyebrow">LOCATION & CONNECTIVITY</span>
 
-            <p class="section-label">
-                Location
-            </p>
-
-            <h2>
-                Connected To What Matters
-            </h2>
+            <h2>Where Location Adds Value.</h2>
 
             <p>
-                Our projects are selected with access to key roads,
-                neighbourhoods, schools, workplaces and essential
-                facilities in mind.
+                A great property is about more than the space itself.
+                We look at connectivity, surrounding development,
+                everyday convenience and the potential of the neighbourhood
+                when presenting opportunities to our customers.
             </p>
+        </div>
+
+
+        <div class="location-grid">
+
+            <article class="location-card">
+                <div class="location-icon">
+                    <i class="fa-solid fa-road"></i>
+                </div>
+
+                <h3>Strategic Connectivity</h3>
+
+                <p>
+                    Access to important roads and key destinations.
+                </p>
+            </article>
+
+
+            <article class="location-card">
+                <div class="location-icon">
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+                </div>
+
+                <h3>Growing Neighbourhoods</h3>
+
+                <p>
+                    Opportunities in locations with development potential.
+                </p>
+            </article>
+
+
+            <article class="location-card">
+                <div class="location-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <h3>Everyday Convenience</h3>
+
+                <p>
+                    Schools, workplaces, essentials and lifestyle
+                    destinations within reach.
+                </p>
+            </article>
 
         </div>
 
     </div>
-
 </section>
-
-
 <!-- =========================================================
      SITE VISIT CTA
      ========================================================= -->
@@ -440,38 +462,35 @@ AJ Developers | Developing Spaces, Enriching Lives.
      ABOUT
      ========================================================= -->
 
-<section class="project-section" id="about">
-
+<section class="about-section" id="about">
     <div class="container">
 
         <div class="section-heading">
-
-            <p class="section-label">
-                About AJ Developers
-            </p>
+            <p class="section-label">About AJ Developers</p>
 
             <h2>
-                Developing Spaces, Enriching Lives.
+                Real Estate Opportunities,
+                Chosen With Purpose.
             </h2>
 
             <p>
-                AJ Developers develops and markets real estate projects
-                with a focus on thoughtfully planned spaces, strategic
-                locations and a customer-focused experience.
+                AJ Developers brings together thoughtfully selected real estate
+                opportunities in promising locations, with a focus on clarity,
+                connectivity and long-term value.
             </p>
 
+            <p>
+                From discovering the right project to planning your site visit,
+                we aim to make every step simple, transparent and
+                customer-focused.
+            </p>
 
-            <a
-                href="#about"
-                class="btn"
-            >
+            <a href="{% url 'projects' %}" class="btn">
                 Learn More
             </a>
-
         </div>
 
     </div>
-
 </section>
 
 

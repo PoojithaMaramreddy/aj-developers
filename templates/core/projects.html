@@ -1,75 +1,190 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}
-Projects | AJ Developers
-{% endblock %}
+{% block title %}Projects | AJ Developers{% endblock %}
 
 {% block content %}
 
-<section class="page-header">
-    <div class="container">
-        <h1>Our Projects</h1>
-        <p>
-            Explore projects developed and marketed by AJ Developers.
-        </p>
+<!-- =========================
+     PROJECTS PAGE HEADER
+========================= -->
+
+<section class="projects-page-hero">
+
+    <div class="projects-page-hero-bg"></div>
+
+    <div class="projects-page-hero-overlay"></div>
+
+    <div class="container projects-page-hero-content">
+
+        <div class="projects-page-hero-text">
+
+            <span class="projects-page-eyebrow">
+                <span></span>
+                OUR PROJECTS
+            </span>
+
+            <h1>
+                Explore Our Projects
+            </h1>
+
+            <p>
+                Explore thoughtfully presented real estate opportunities
+                from AJ Developers.
+            </p>
+
+            <div class="projects-page-hero-line"></div>
+
+        </div>
+
     </div>
+
 </section>
 
 
-<section class="projects-section">
+<!-- =========================
+     PROJECTS LIST
+========================= -->
+
+<section class="projects-list-section">
+
     <div class="container">
 
         {% if projects %}
 
-            <div class="project-grid">
+        <div class="projects-grid">
 
-                {% for project in projects %}
+            {% for project in projects %}
 
-                    <article class="project-card">
+            <article class="project-card">
 
-                        {% if project.layout_image %}
-                            <img
-                                src="{{ project.layout_image.url }}"
-                                alt="{{ project.name }}"
-                            >
+                <!-- Project Image -->
+
+                <a
+                    href="{% url 'project_detail' project.slug %}"
+                    class="project-card-image-link"
+                    aria-label="View {{ project.name }}"
+                >
+
+                    {% if project.layout_image %}
+
+                    <img
+                        src="{{ project.layout_image.url }}"
+                        alt="{{ project.name }}"
+                        class="project-card-image"
+                    >
+
+                    {% else %}
+
+                    <div class="project-card-image-placeholder">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+
+                    {% endif %}
+
+                </a>
+
+
+                <!-- Project Content -->
+
+                <div class="project-card-content">
+
+                    <div class="project-card-top">
+
+                        {% if project.property_type %}
+
+                        <span class="project-type-badge">
+                            {{ project.get_property_type_display }}
+                        </span>
+
                         {% endif %}
 
-                        <div class="project-card-content">
+                    </div>
 
-                            <h2>{{ project.name }}</h2>
 
-                            <p class="project-location">
-                                {{ project.location }}
-                            </p>
+                    <a
+                        href="{% url 'project_detail' project.slug %}"
+                        class="project-card-title-link"
+                    >
 
-                            {% if project.description %}
-                                <p>
-                                    {{ project.description|truncatewords:25 }}
-                                </p>
-                            {% endif %}
+                        <h2>
+                            {{ project.name }}
+                        </h2>
 
-                            <a
-                                href="{% url 'project_detail' project.slug %}"
-                                class="btn"
-                            >
-                                View Project
-                            </a>
+                    </a>
 
-                        </div>
 
-                    </article>
+                    {% if project.location %}
 
-                {% endfor %}
+                    <p class="project-card-location">
 
-            </div>
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        {{ project.location }}
+
+                    </p>
+
+                    {% endif %}
+
+
+                    {% if project.description %}
+
+                    <p class="project-card-description">
+
+                        {{ project.description|truncatewords:24 }}
+
+                    </p>
+
+                    {% endif %}
+
+
+                    <div class="project-card-footer">
+
+                        <a
+                            href="{% url 'project_detail' project.slug %}"
+                            class="project-view-link"
+                        >
+
+                            View Project
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
 
         {% else %}
 
-            <p>No projects are currently available.</p>
+        <div class="projects-empty">
+
+            <i class="fa-solid fa-building-circle-exclamation"></i>
+
+            <h2>
+                Projects Coming Soon
+            </h2>
+
+            <p>
+                New real estate opportunities will be added here.
+            </p>
+
+            <a href="{% url 'home' %}" class="btn">
+                Back to Home
+            </a>
+
+        </div>
 
         {% endif %}
 
     </div>
+
 </section>
 
 {% endblock %}
