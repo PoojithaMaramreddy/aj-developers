@@ -176,13 +176,17 @@ img {
 
 .main-nav .nav-whatsapp {
     width: 62px;
+
     height: 54px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     background: #25D366;
+
     color: #ffffff;
 
     border-radius: 6px;
@@ -199,15 +203,18 @@ img {
 
 .main-nav .nav-whatsapp:hover {
     background: #1ebe5d;
+
     color: #ffffff;
 
     transform: translateY(-2px);
 
-    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.30);
+    box-shadow:
+        0 6px 16px rgba(37, 211, 102, 0.30);
 }
 
 .main-nav .nav-whatsapp i {
     color: #ffffff;
+
     line-height: 1;
 }
 
@@ -234,6 +241,8 @@ img {
 
     font-weight: 600;
 
+    cursor: pointer;
+
     transition:
         background 0.2s ease,
         border-color 0.2s ease,
@@ -256,155 +265,6 @@ img {
 }
 
 
-/* =========================================================
-   PREMIUM HERO
-   ========================================================= */
-
-.hero {
-    position: relative;
-
-    min-height: 720px;
-
-    overflow: hidden;
-
-    background: var(--primary-color);
-}
-
-
-/* =========================================================
-   HERO BACKGROUND
-   ========================================================= */
-
-.hero-background {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 0;
-
-    background-image:
-        linear-gradient(rgba(21, 39, 55, 0.10),
-            rgba(21, 39, 55, 0.10)),
-        url("/static/images/Hero.png");
-
-    background-size: cover;
-
-    background-position: center center;
-
-    background-repeat: no-repeat;
-
-    transform: scale(1.01);
-}
-
-
-/* =========================================================
-   HERO CONTENT WRAPPER
-   ========================================================= */
-
-.hero-content {
-    position: relative;
-
-    z-index: 2;
-
-    min-height: 720px;
-
-    padding-top: 0;
-
-    padding-bottom: 0;
-}
-
-
-/* =========================================================
-   HERO MAIN CONTENT
-   ========================================================= */
-
-.hero-main {
-    position: absolute;
-
-    left: 0;
-
-    top: 125px;
-
-    max-width: 680px;
-}
-
-
-/* =========================================================
-   MAIN HEADLINE
-   ========================================================= */
-
-.hero h1 {
-    margin: 0 0 22px;
-
-    max-width: 680px;
-
-    color: var(--primary-color);
-
-    font-size:
-        clamp(3.3rem, 5vw, 5rem);
-
-    line-height: 1.02;
-
-    letter-spacing: -2px;
-}
-
-
-/* Gold second line */
-
-.hero h1 span {
-    display: block;
-
-    color: var(--secondary-dark);
-}
-
-
-/* =========================================================
-   HERO DESCRIPTION
-   ========================================================= */
-
-.hero-description {
-    max-width: 570px;
-
-    margin: 0 0 30px;
-
-    color: var(--primary-color);
-
-    font-size: 1.08rem;
-
-    line-height: 1.7;
-
-    font-weight: 500;
-}
-
-
-/* =========================================================
-   HERO BUTTONS
-   ========================================================= */
-
-.hero-actions {
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    flex-wrap: wrap;
-}
-
-
-.hero-actions .btn {
-    min-height: 50px;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-}
-
-
-/* Primary CTA */
-
 .btn-primary {
     background: var(--primary-color);
 
@@ -422,8 +282,6 @@ img {
     color: var(--white-color);
 }
 
-
-/* Secondary CTA */
 
 .btn-outline {
     background:
@@ -444,6 +302,129 @@ img {
     border-color: var(--primary-color);
 
     color: var(--white-color);
+}
+
+
+/* =========================================================
+   PREMIUM HERO
+   ========================================================= */
+
+.hero {
+    position: relative;
+
+    min-height: 720px;
+
+    overflow: hidden;
+
+    background: var(--primary-color);
+}
+
+
+.hero-background {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(21, 39, 55, 0.10),
+            rgba(21, 39, 55, 0.10)
+        ),
+        url("/static/images/Hero.png");
+
+    background-size: cover;
+
+    background-position: center center;
+
+    background-repeat: no-repeat;
+
+    transform: scale(1.01);
+}
+
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 720px;
+
+    padding-top: 0;
+
+    padding-bottom: 0;
+}
+
+
+.hero-main {
+    position: absolute;
+
+    left: 0;
+
+    top: 125px;
+
+    max-width: 680px;
+}
+
+
+.hero h1 {
+    margin: 0 0 22px;
+
+    max-width: 680px;
+
+    color: var(--primary-color);
+
+    font-size:
+        clamp(3.3rem, 5vw, 5rem);
+
+    line-height: 1.02;
+
+    letter-spacing: -2px;
+}
+
+
+.hero h1 span {
+    display: block;
+
+    color: var(--secondary-dark);
+}
+
+
+.hero-description {
+    max-width: 570px;
+
+    margin: 0 0 30px;
+
+    color: var(--primary-color);
+
+    font-size: 1.08rem;
+
+    line-height: 1.7;
+
+    font-weight: 500;
+}
+
+
+.hero-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+
+.hero-actions .btn {
+    min-height: 50px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
 }
 
 
@@ -504,8 +485,6 @@ img {
 }
 
 
-/* Gold underline */
-
 .hero-message-line {
     width: 120px;
 
@@ -518,10 +497,6 @@ img {
     transform: rotate(-5deg);
 }
 
-
-/* =========================================================
-   TRANSPARENT HERO LOGO
-   ========================================================= */
 
 .hero-message-logo {
     display: block;
@@ -587,8 +562,6 @@ img {
 }
 
 
-/* Individual category */
-
 .hero-category {
     min-height: 62px;
 
@@ -616,8 +589,6 @@ img {
 }
 
 
-/* Category icon */
-
 .hero-category-icon {
     flex-shrink: 0;
 
@@ -628,8 +599,6 @@ img {
     line-height: 1;
 }
 
-
-/* Category text */
 
 .hero-category span {
     font-size: 0.72rem;
@@ -737,9 +706,11 @@ img {
     text-align: center;
 
     background:
-        linear-gradient(135deg,
+        linear-gradient(
+            135deg,
             var(--light-color),
-            var(--cream-color));
+            var(--cream-color)
+        );
 }
 
 
@@ -912,16 +883,18 @@ img {
 
 
 /* =========================================================
-   PROJECT DETAIL
+   PROJECT DETAIL HERO
    ========================================================= */
 
 .project-detail-hero {
     padding: 90px 0;
 
     background:
-        linear-gradient(135deg,
+        linear-gradient(
+            135deg,
             var(--primary-color),
-            var(--primary-light));
+            var(--primary-light)
+        );
 
     color: var(--white-color);
 }
@@ -943,6 +916,43 @@ img {
 
 .project-detail-hero .project-location {
     color: #f5f5f5;
+}
+
+
+/* =========================================================
+   APPROVALS
+   ========================================================= */
+
+.approval-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+.approval-card p {
+    margin: 8px 0;
+}
+
+
+.approval-card a {
+    display: inline-block;
+
+    margin-top: 10px;
+
+    color: var(--secondary-dark);
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+.approval-card a:hover {
+    text-decoration: underline;
 }
 
 
@@ -986,6 +996,30 @@ img {
 
 
 /* =========================================================
+   VIDEOS
+   ========================================================= */
+
+.video-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+
+.video-card p {
+    margin-bottom: 20px;
+}
+
+
+.video-card .btn {
+    margin-top: 5px;
+}
+
+
+/* =========================================================
    LAYOUT
    ========================================================= */
 
@@ -1015,9 +1049,11 @@ img {
     text-align: center;
 
     background:
-        linear-gradient(135deg,
+        linear-gradient(
+            135deg,
             var(--cream-color),
-            var(--light-color));
+            var(--light-color)
+        );
 }
 
 
@@ -1030,6 +1066,260 @@ img {
 
 .project-cta .btn {
     margin: 8px;
+}
+
+
+/* =========================================================
+   ENQUIRY FORM
+   ========================================================= */
+
+.enquiry-section {
+    background: #f8f4eb;
+}
+
+
+.enquiry-form {
+    max-width: 850px;
+
+    margin: 45px auto 0;
+
+    padding: 35px;
+
+    background: #ffffff;
+
+    border:
+        1px solid #e3dacb;
+
+    box-shadow:
+        0 12px 35px rgba(21, 39, 55, 0.08);
+}
+
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 22px;
+}
+
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.form-group-full {
+    grid-column: 1 / -1;
+}
+
+
+.form-group label {
+    margin-bottom: 8px;
+
+    color: #152737;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border:
+        1px solid #d9d1c3;
+
+    background: #fffdf9;
+
+    color: #152737;
+
+    font: inherit;
+
+    box-sizing: border-box;
+
+    border-radius: 0;
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+
+    border-color: #c99a3d;
+
+    box-shadow:
+        0 0 0 2px rgba(201, 154, 61, 0.12);
+}
+
+
+.form-group textarea {
+    resize: vertical;
+
+    min-height: 120px;
+}
+
+
+.checkbox-label {
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    cursor: pointer;
+
+    font-weight: 400 !important;
+}
+
+
+.checkbox-label input {
+    width: auto;
+
+    margin-top: 4px;
+}
+
+
+.enquiry-form .btn {
+    margin-top: 25px;
+}
+
+
+/* =========================================================
+   FORM MESSAGES
+   ========================================================= */
+
+.enquiry-success,
+.form-success {
+    max-width: 850px;
+
+    margin: 45px auto;
+
+    padding: 35px;
+
+    background: #ffffff;
+
+    border-left:
+        4px solid #c99a3d;
+
+    box-shadow:
+        0 8px 24px rgba(21, 39, 55, 0.06);
+}
+
+
+.enquiry-success h3 {
+    margin-top: 0;
+
+    color: #152737;
+}
+
+
+.enquiry-success p {
+    margin-bottom: 0;
+}
+
+
+.enquiry-error,
+.form-error {
+    max-width: 850px;
+
+    margin: 25px auto;
+
+    padding: 15px 20px;
+
+    background: #fff1f1;
+
+    border-left:
+        4px solid #b54a4a;
+
+    color: #7a2929;
+}
+
+
+.enquiry-direct-contact {
+    margin-top: 40px;
+
+    text-align: center;
+}
+
+
+.enquiry-direct-contact p {
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   SITE VISIT
+   ========================================================= */
+
+.site-visit-section {
+    background: var(--light-color);
+}
+
+
+.site-visit-section .section-heading {
+    margin-left: auto;
+
+    margin-right: auto;
+
+    text-align: center;
+}
+
+
+.site-visit-section .section-heading p:not(.section-label) {
+    max-width: 700px;
+
+    margin-left: auto;
+
+    margin-right: auto;
+}
+
+
+/* =========================================================
+   BOOKING
+   ========================================================= */
+
+.booking-section {
+    background:
+        linear-gradient(
+            135deg,
+            var(--light-color),
+            var(--cream-color)
+        );
+}
+
+
+.booking-section .section-heading {
+    margin-left: auto;
+
+    margin-right: auto;
+
+    text-align: center;
+}
+
+
+.booking-section .section-heading p:not(.section-label) {
+    max-width: 700px;
+
+    margin-left: auto;
+
+    margin-right: auto;
+}
+
+
+.booking-section .enquiry-form {
+    text-align: left;
 }
 
 
@@ -1052,6 +1342,15 @@ footer {
 
 footer p {
     margin: 0;
+}
+
+
+/* =========================================================
+   MOBILE FIXED CTA
+   ========================================================= */
+
+.mobile-fixed-cta {
+    display: none;
 }
 
 
@@ -1081,6 +1380,17 @@ footer p {
     .gallery-grid {
         grid-template-columns:
             repeat(2, 1fr);
+    }
+
+
+    .approval-list {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .video-list {
+        grid-template-columns: 1fr;
     }
 
 
@@ -1119,6 +1429,7 @@ footer p {
     .hero-categories {
         width: 88%;
     }
+
 }
 
 
@@ -1151,6 +1462,13 @@ footer p {
     }
 
 
+    .brand-logo {
+        width: 135px;
+
+        height: 55px;
+    }
+
+
     .brand-logo img {
         width: 135px;
 
@@ -1177,7 +1495,13 @@ footer p {
 
 
     .main-nav .nav-whatsapp {
-        padding: 8px 14px;
+        width: 48px;
+
+        height: 42px;
+
+        padding: 8px 10px;
+
+        font-size: 1.25rem;
     }
 
 
@@ -1194,8 +1518,10 @@ footer p {
         background-position: 62% center;
 
         background-image:
-            linear-gradient(rgba(21, 39, 55, 0.10),
-                rgba(21, 39, 55, 0.10)),
+            linear-gradient(
+                rgba(21, 39, 55, 0.10),
+                rgba(21, 39, 55, 0.10)
+            ),
             url("/static/images/Hero.png");
     }
 
@@ -1206,10 +1532,6 @@ footer p {
         width: 92%;
     }
 
-
-    /* -------------------------
-       Main hero content
-       ------------------------- */
 
     .hero-main {
         position: absolute;
@@ -1393,7 +1715,9 @@ footer p {
 
     .project-grid,
     .amenities-grid,
-    .gallery-grid {
+    .gallery-grid,
+    .approval-list,
+    .video-list {
         grid-template-columns: 1fr;
     }
 
@@ -1405,6 +1729,8 @@ footer p {
 
     .project-detail-hero h1 {
         font-size: 2.3rem;
+
+        line-height: 1.15;
     }
 
 
@@ -1418,194 +1744,131 @@ footer p {
         font-size: 1.9rem;
     }
 
-}
 
-/* =========================================
-   ENQUIRY FORM
-   ========================================= */
+    /* -------------------------
+       Cards
+       ------------------------- */
 
-.enquiry-section {
-    background: #f8f4eb;
-}
-
-.enquiry-form {
-    max-width: 850px;
-    margin: 45px auto 0;
-    padding: 35px;
-    background: #ffffff;
-    border: 1px solid #e3dacb;
-    box-shadow: 0 12px 35px rgba(21, 39, 55, 0.08);
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group-full {
-    grid-column: 1 / -1;
-}
-
-.form-group label {
-    margin-bottom: 8px;
-    color: #152737;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 13px 14px;
-    border: 1px solid #d9d1c3;
-    background: #fffdf9;
-    color: #152737;
-    font: inherit;
-    box-sizing: border-box;
-    border-radius: 0;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #c99a3d;
-    box-shadow: 0 0 0 2px rgba(201, 154, 61, 0.12);
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
-.checkbox-label {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start;
-    gap: 10px;
-    cursor: pointer;
-    font-weight: 400 !important;
-}
-
-.checkbox-label input {
-    width: auto;
-    margin-top: 4px;
-}
-
-.enquiry-form .btn {
-    margin-top: 25px;
-}
-
-.enquiry-success {
-    max-width: 850px;
-    margin: 45px auto;
-    padding: 35px;
-    background: #ffffff;
-    border-left: 4px solid #c99a3d;
-}
-
-.enquiry-success h3 {
-    margin-top: 0;
-    color: #152737;
-}
-
-.enquiry-success p {
-    margin-bottom: 0;
-}
-
-.enquiry-error {
-    max-width: 850px;
-    margin: 25px auto;
-    padding: 15px 20px;
-    background: #fff1f1;
-    border-left: 4px solid #b54a4a;
-    color: #7a2929;
-}
-
-.enquiry-direct-contact {
-    margin-top: 40px;
-    text-align: center;
-}
-
-.enquiry-direct-contact p {
-    margin-bottom: 15px;
-}
+    .amenity-card,
+    .approval-card,
+    .video-card {
+        padding: 20px;
+    }
 
 
-@media (max-width: 650px) {
+    /* -------------------------
+       Gallery
+       ------------------------- */
+
+    .gallery-item img {
+        height: 220px;
+    }
+
+
+    /* -------------------------
+       Forms
+       ------------------------- */
 
     .enquiry-form {
         padding: 22px;
+
+        margin-top: 30px;
     }
+
 
     .form-grid {
         grid-template-columns: 1fr;
+
         gap: 18px;
     }
+
 
     .form-group-full {
         grid-column: auto;
     }
 
-}
 
-/* =========================================
-   SITE VISIT
-   ========================================= */
-
-.site-visit-section {
-    background: var(--light-color);
-}
-
-.site-visit-section .section-heading {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-.site-visit-section .section-heading p:not(.section-label) {
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* =========================================
-   MOBILE FIXED CTA
-   ========================================= */
-
-.mobile-fixed-cta {
-    display: none;
-}
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px;
+    }
 
 
-@media (max-width: 600px) {
+    .enquiry-form .btn {
+        width: 100%;
+
+        margin-top: 20px;
+    }
+
+
+    .enquiry-direct-contact .btn {
+        display: block;
+
+        width: 100%;
+
+        margin: 10px 0;
+    }
+
+
+    .enquiry-success,
+    .form-success {
+        padding: 24px;
+
+        margin: 30px auto;
+    }
+
+
+    /* -------------------------
+       CTA sections
+       ------------------------- */
+
+    .project-cta {
+        padding: 65px 0;
+    }
+
+
+    .project-cta h2 {
+        font-size: 1.9rem;
+    }
+
+
+    .project-cta .btn {
+        width: 100%;
+
+        margin: 8px 0;
+    }
+
+
+    /* -------------------------
+       Mobile fixed CTA
+       ------------------------- */
 
     .mobile-fixed-cta {
 
         position: fixed;
 
         left: 0;
+
         right: 0;
+
         bottom: 0;
 
         z-index: 1100;
 
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
 
-        background: var(--primary-color);
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        background:
+            var(--primary-color);
 
         box-shadow:
             0 -4px 18px rgba(0, 0, 0, 0.18);
 
-        padding-bottom: env(safe-area-inset-bottom);
-
+        padding-bottom:
+            env(safe-area-inset-bottom);
     }
 
 
@@ -1618,6 +1881,7 @@ footer p {
         flex-direction: column;
 
         align-items: center;
+
         justify-content: center;
 
         gap: 5px;
@@ -1627,10 +1891,11 @@ footer p {
         text-decoration: none;
 
         font-size: 12px;
+
         font-weight: 600;
 
-        transition: background 0.2s ease;
-
+        transition:
+            background 0.2s ease;
     }
 
 
@@ -1638,14 +1903,12 @@ footer p {
 
         border-left:
             1px solid rgba(255, 255, 255, 0.18);
-
     }
 
 
     .mobile-fixed-cta i {
 
         font-size: 19px;
-
     }
 
 
@@ -1653,14 +1916,58 @@ footer p {
 
         background:
             rgba(255, 255, 255, 0.08);
-
     }
 
 
     body {
 
         padding-bottom: 62px;
+    }
 
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .main-nav {
+        gap: 7px 10px;
+    }
+
+
+    .main-nav a {
+        font-size: 0.82rem;
+    }
+
+
+    .hero h1 {
+        font-size: 2.35rem;
+    }
+
+
+    .hero-message {
+        width: 130px;
+    }
+
+
+    .hero-message span,
+    .hero-message strong {
+        font-size: 0.85rem;
+    }
+
+
+    .hero-category span {
+        font-size: 0.56rem;
+    }
+
+
+    .hero-trust {
+        font-size: 0.46rem;
+
+        letter-spacing: 1px;
     }
 
 }

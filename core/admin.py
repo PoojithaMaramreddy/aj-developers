@@ -16,6 +16,58 @@ from .models import (
     CampaignRecipient,
 )
 
+class ProjectImageInline(admin.TabularInline):
+    model = ProjectImage
+    extra = 0
+    fields = ("image", "title", "caption", "display_order")
+    readonly_fields = ("created_at",)
+    ordering = ("display_order",)
+
+
+class ProjectVideoInline(admin.TabularInline):
+    model = ProjectVideo
+    extra = 0
+    fields = ("title", "youtube_url", "description", "display_order")
+    readonly_fields = ("created_at",)
+    ordering = ("display_order",)
+
+
+class AmenityInline(admin.TabularInline):
+    model = Amenity
+    extra = 0
+    fields = ("name", "description", "display_order")
+    readonly_fields = ("created_at",)
+    ordering = ("display_order",)
+
+
+class ProjectApprovalInline(admin.TabularInline):
+    model = ProjectApproval
+    extra = 0
+    fields = (
+        "approval_type",
+        "approval_number",
+        "authority",
+        "document",
+        "description",
+        "display_order",
+    )
+    readonly_fields = ("created_at",)
+    ordering = ("display_order",)
+
+
+class PlotInline(admin.TabularInline):
+    model = Plot
+    extra = 0
+    fields = (
+        "plot_number",
+        "plot_size",
+        "dimension",
+        "facing",
+        "block",
+        "layout_position",
+    )
+    readonly_fields = ("created_at",)
+    ordering = ("plot_number",)
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
@@ -30,6 +82,14 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ("name", "location", "slug")
     readonly_fields = ("created_at", "updated_at")
     prepopulated_fields = {"slug": ("name",)}
+
+    inlines = [
+        ProjectImageInline,
+        ProjectVideoInline,
+        AmenityInline,
+        ProjectApprovalInline,
+        PlotInline,
+    ]
 
 
 @admin.register(ProjectImage)

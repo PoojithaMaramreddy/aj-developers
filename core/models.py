@@ -76,6 +76,7 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+
 class ProjectImage(models.Model):
     project = models.ForeignKey(
         Project,
@@ -110,6 +111,7 @@ class ProjectImage(models.Model):
     def __str__(self):
         return f"{self.project.name} - {self.title or 'Image'}"
 
+
 class ProjectVideo(models.Model):
     project = models.ForeignKey(
         Project,
@@ -142,6 +144,7 @@ class ProjectVideo(models.Model):
     def __str__(self):
         return f"{self.project.name} - {self.title or 'Video'}"
 
+
 class Amenity(models.Model):
     project = models.ForeignKey(
         Project,
@@ -168,6 +171,7 @@ class Amenity(models.Model):
 
     def __str__(self):
         return f"{self.project.name} - {self.name}"
+
 
 class ProjectApproval(models.Model):
     project = models.ForeignKey(
@@ -214,6 +218,7 @@ class ProjectApproval(models.Model):
     def __str__(self):
         return f"{self.project.name} - {self.approval_type}"
 
+
 class Plot(models.Model):
     project = models.ForeignKey(
         Project,
@@ -259,6 +264,7 @@ class Plot(models.Model):
 
     def __str__(self):
         return f"{self.project.name} - Plot {self.plot_number}"
+
 
 class Lead(models.Model):
     STATUS_CHOICES = [
@@ -342,9 +348,16 @@ class Lead(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["phone", "interested_project"],
+                name="unique_lead_phone_project",
+            ),
+        ]
 
     def __str__(self):
         return f"{self.name} - {self.phone}"
+
 
 class SiteVisit(models.Model):
     STATUS_CHOICES = [
@@ -397,6 +410,7 @@ class SiteVisit(models.Model):
 
     def __str__(self):
         return f"{self.lead.name} - {self.project.name} - {self.preferred_date}"
+
 
 class BookingRequest(models.Model):
     STATUS_CHOICES = [
@@ -451,6 +465,7 @@ class BookingRequest(models.Model):
     def __str__(self):
         return f"{self.lead.name} - {self.project.name}"
 
+
 class SalesAgent(models.Model):
     name = models.CharField(
         max_length=200,
@@ -474,6 +489,7 @@ class SalesAgent(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class LeadFollowUp(models.Model):
     FOLLOW_UP_TYPES = [
@@ -532,6 +548,7 @@ class LeadFollowUp(models.Model):
     def __str__(self):
         return f"{self.lead.name} - {self.follow_up_date}"
 
+
 class Campaign(models.Model):
     CAMPAIGN_TYPES = [
         ("NEW_PROJECT", "New Project Launch"),
@@ -587,6 +604,7 @@ class Campaign(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class CampaignRecipient(models.Model):
     STATUS_CHOICES = [

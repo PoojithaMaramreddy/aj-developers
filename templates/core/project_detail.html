@@ -10,73 +10,125 @@
 
 {% block content %}
 
-<!-- Project Hero -->
+
+<!-- =========================================================
+     PROJECT HERO
+     ========================================================= -->
+
 <section class="project-detail-hero">
+
     <div class="container">
 
         <p class="project-type">
             {{ project.get_property_type_display }}
         </p>
 
-        <h1>{{ project.name }}</h1>
+        <h1>
+            {{ project.name }}
+        </h1>
 
         <p class="project-location">
             {{ project.location }}
         </p>
 
     </div>
+
 </section>
 
 
-<!-- Project Overview -->
+<!-- =========================================================
+     PROJECT OVERVIEW
+     ========================================================= -->
+
 <section class="project-overview">
+
     <div class="container">
 
-        <h2>Project Overview</h2>
+        <h2>
+            Project Overview
+        </h2>
 
         {% if project.description %}
-            <p>{{ project.description }}</p>
+
+            <p>
+                {{ project.description }}
+            </p>
+
         {% endif %}
+
 
         {% if project.location_description %}
-            <p>{{ project.location_description }}</p>
+
+            <p>
+                {{ project.location_description }}
+            </p>
+
         {% endif %}
 
     </div>
+
 </section>
 
 
-<!-- Project Highlights -->
+<!-- =========================================================
+     PROJECT HIGHLIGHTS
+     ========================================================= -->
+
 {% if project.highlights %}
+
 <section class="project-section">
+
     <div class="container">
 
-        <h2>Project Highlights</h2>
+        <h2>
+            Project Highlights
+        </h2>
 
-        <p>{{ project.highlights }}</p>
+        <p>
+            {{ project.highlights }}
+        </p>
 
     </div>
+
 </section>
+
 {% endif %}
 
 
-<!-- Amenities -->
+<!-- =========================================================
+     AMENITIES
+     ========================================================= -->
+
 {% if project.amenities.all %}
+
 <section class="project-section">
+
     <div class="container">
 
-        <h2>Amenities</h2>
+        <h2>
+            Amenities
+        </h2>
+
 
         <div class="amenities-grid">
 
             {% for amenity in project.amenities.all %}
 
                 <div class="amenity-card">
-                    <h3>{{ amenity.name }}</h3>
+
+                    <h3>
+                        {{ amenity.name }}
+                    </h3>
+
 
                     {% if amenity.description %}
-                        <p>{{ amenity.description }}</p>
+
+                        <p>
+                            {{ amenity.description }}
+                        </p>
+
                     {% endif %}
+
                 </div>
 
             {% endfor %}
@@ -84,19 +136,31 @@
         </div>
 
     </div>
+
 </section>
+
 {% endif %}
 
 
-<!-- Location -->
+<!-- =========================================================
+     LOCATION
+     ========================================================= -->
+
 <section class="project-section">
+
     <div class="container">
 
-        <h2>Location</h2>
+        <h2>
+            Location
+        </h2>
 
-        <p>{{ project.location }}</p>
+        <p>
+            {{ project.location }}
+        </p>
+
 
         {% if project.google_maps_url %}
+
             <a
                 href="{{ project.google_maps_url }}"
                 target="_blank"
@@ -105,18 +169,28 @@
             >
                 View on Google Maps
             </a>
+
         {% endif %}
 
     </div>
+
 </section>
 
 
-<!-- Approvals -->
+<!-- =========================================================
+     APPROVALS & LEGAL INFORMATION
+     ========================================================= -->
+
 {% if project.approvals.all %}
+
 <section class="project-section">
+
     <div class="container">
 
-        <h2>Approvals & Legal Information</h2>
+        <h2>
+            Approvals & Legal Information
+        </h2>
+
 
         <div class="approval-list">
 
@@ -124,27 +198,52 @@
 
                 <div class="approval-card">
 
-                    <h3>{{ approval.approval_type }}</h3>
+                    <h3>
+                        {{ approval.approval_type }}
+                    </h3>
+
 
                     {% if approval.authority %}
+
                         <p>
-                            <strong>Authority:</strong>
+
+                            <strong>
+                                Authority:
+                            </strong>
+
                             {{ approval.authority }}
+
                         </p>
+
                     {% endif %}
+
 
                     {% if approval.approval_number %}
+
                         <p>
-                            <strong>Reference:</strong>
+
+                            <strong>
+                                Reference:
+                            </strong>
+
                             {{ approval.approval_number }}
+
                         </p>
+
                     {% endif %}
+
 
                     {% if approval.description %}
-                        <p>{{ approval.description }}</p>
+
+                        <p>
+                            {{ approval.description }}
+                        </p>
+
                     {% endif %}
 
+
                     {% if approval.document %}
+
                         <a
                             href="{{ approval.document.url }}"
                             target="_blank"
@@ -152,6 +251,7 @@
                         >
                             View Document
                         </a>
+
                     {% endif %}
 
                 </div>
@@ -161,16 +261,26 @@
         </div>
 
     </div>
+
 </section>
+
 {% endif %}
 
 
-<!-- Gallery -->
+<!-- =========================================================
+     GALLERY
+     ========================================================= -->
+
 {% if project.images.all %}
+
 <section class="project-section">
+
     <div class="container">
 
-        <h2>Gallery</h2>
+        <h2>
+            Gallery
+        </h2>
+
 
         <div class="gallery-grid">
 
@@ -183,10 +293,13 @@
                         alt="{{ image.title|default:project.name }}"
                     >
 
+
                     {% if image.caption %}
+
                         <figcaption>
                             {{ image.caption }}
                         </figcaption>
+
                     {% endif %}
 
                 </figure>
@@ -196,16 +309,26 @@
         </div>
 
     </div>
+
 </section>
+
 {% endif %}
 
 
-<!-- Videos -->
+<!-- =========================================================
+     VIDEOS
+     ========================================================= -->
+
 {% if project.videos.all %}
+
 <section class="project-section">
+
     <div class="container">
 
-        <h2>Videos</h2>
+        <h2>
+            Videos
+        </h2>
+
 
         <div class="video-list">
 
@@ -213,11 +336,19 @@
 
                 <div class="video-card">
 
-                    <h3>{{ video.title }}</h3>
+                    <h3>
+                        {{ video.title }}
+                    </h3>
+
 
                     {% if video.description %}
-                        <p>{{ video.description }}</p>
+
+                        <p>
+                            {{ video.description }}
+                        </p>
+
                     {% endif %}
+
 
                     <a
                         href="{{ video.youtube_url }}"
@@ -235,16 +366,26 @@
         </div>
 
     </div>
+
 </section>
+
 {% endif %}
 
 
-<!-- Layout -->
+<!-- =========================================================
+     LAYOUT
+     ========================================================= -->
+
 {% if project.layout_image %}
+
 <section class="project-section">
+
     <div class="container">
 
-        <h2>Layout</h2>
+        <h2>
+            Layout
+        </h2>
+
 
         <img
             src="{{ project.layout_image.url }}"
@@ -253,16 +394,26 @@
         >
 
     </div>
+
 </section>
+
 {% endif %}
 
 
-<!-- Brochure -->
+<!-- =========================================================
+     BROCHURE
+     ========================================================= -->
+
 {% if project.brochure %}
+
 <section class="project-section">
+
     <div class="container">
 
-        <h2>Project Brochure</h2>
+        <h2>
+            Project Brochure
+        </h2>
+
 
         <a
             href="{{ project.brochure.url }}"
@@ -274,14 +425,23 @@
         </a>
 
     </div>
+
 </section>
+
 {% endif %}
 
 
-<!-- Enquiry -->
-<section class="project-cta enquiry-section" id="enquiry">
+<!-- =========================================================
+     ENQUIRY
+     ========================================================= -->
+
+<section
+    class="project-cta enquiry-section"
+    id="enquiry"
+>
 
     <div class="container">
+
 
         <div class="section-heading">
 
@@ -317,6 +477,7 @@
             </div>
 
         {% else %}
+
 
             {% if enquiry_error %}
 
@@ -398,44 +559,6 @@
                     </div>
 
 
-                    <!-- Interested Plot -->
-
-                    {% with plots=project.plots.all %}
-
-                        {% if plots %}
-
-                            <div class="form-group">
-
-                                <label for="interested_plot">
-                                    Interested Plot
-                                </label>
-
-                                <select
-                                    id="interested_plot"
-                                    name="interested_plot"
-                                >
-
-                                    <option value="">
-                                        Select plot (optional)
-                                    </option>
-
-                                    {% for plot in plots %}
-
-                                        <option value="{{ plot.id }}">
-                                            Plot {{ plot.plot_number }}
-                                        </option>
-
-                                    {% endfor %}
-
-                                </select>
-
-                            </div>
-
-                        {% endif %}
-
-                    {% endwith %}
-
-
                     <!-- Message -->
 
                     <div class="form-group form-group-full">
@@ -473,7 +596,6 @@
                         </label>
 
                     </div>
-
 
                 </div>
 
@@ -516,20 +638,24 @@
                 WhatsApp Us
             </a>
 
-                <div class="enquiry-direct-contact">
-
-            ...
-
         </div>
 
     </div>
 
 </section>
 
-<!-- Site Visit -->
-<section class="project-cta site-visit-section" id="site-visit">
+
+<!-- =========================================================
+     SITE VISIT
+     ========================================================= -->
+
+<section
+    class="project-cta site-visit-section"
+    id="site-visit"
+>
 
     <div class="container">
+
 
         <div class="section-heading">
 
@@ -566,6 +692,7 @@
             </div>
 
         {% else %}
+
 
             {% if site_visit_error %}
 
@@ -717,18 +844,32 @@
 
 </section>
 
-<!-- Mobile Fixed CTA -->
+
+<!-- =========================================================
+     MOBILE FIXED CTA
+     ========================================================= -->
+
 <div class="mobile-fixed-cta">
+
+
+    <!-- Call -->
 
     <a
         href="tel:+918977914586"
         class="mobile-cta-item"
         aria-label="Call AJ Developers"
     >
+
         <i class="fa-solid fa-phone"></i>
-        <span>Call</span>
+
+        <span>
+            Call
+        </span>
+
     </a>
 
+
+    <!-- WhatsApp -->
 
     <a
         href="https://wa.me/918977914586?text=Hi%20AJ%20Developers%2C%20I%20am%20interested%20in%20{{ project.name|urlencode }}."
@@ -737,25 +878,46 @@
         class="mobile-cta-item"
         aria-label="WhatsApp AJ Developers"
     >
+
         <i class="fa-brands fa-whatsapp"></i>
-        <span>WhatsApp</span>
+
+        <span>
+            WhatsApp
+        </span>
+
     </a>
 
+
+    <!-- Site Visit -->
 
     <a
         href="#site-visit"
         class="mobile-cta-item"
         aria-label="Schedule a site visit"
     >
+
         <i class="fa-regular fa-calendar"></i>
-        <span>Site Visit</span>
+
+        <span>
+            Site Visit
+        </span>
+
     </a>
 
 </div>
 
-<section class="project-cta booking-section" id="booking">
+
+<!-- =========================================================
+     BOOKING REQUEST
+     ========================================================= -->
+
+<section
+    class="project-cta booking-section"
+    id="booking"
+>
 
     <div class="container">
+
 
         <div class="section-heading">
 
@@ -776,22 +938,33 @@
         </div>
 
 
+        <!-- Booking Success -->
+
         {% if request.GET.booking == "success" %}
 
             <div class="form-success">
+
                 Your booking request has been received.
                 Our team will contact you shortly.
+
             </div>
+
+
+        <!-- Booking Already Requested -->
 
         {% elif request.GET.booking == "already_requested" %}
 
             <div class="form-success">
+
                 Your booking request has already been received.
                 Our team will contact you shortly.
+
             </div>
 
         {% endif %}
 
+
+        <!-- Booking Error -->
 
         {% if booking_error %}
 
@@ -802,6 +975,8 @@
         {% endif %}
 
 
+        <!-- Booking Form -->
+
         <form
             method="post"
             action="{% url 'project_booking_request' project.slug %}"
@@ -810,6 +985,8 @@
 
             {% csrf_token %}
 
+
+            <!-- Name -->
 
             <div class="form-group">
 
@@ -828,6 +1005,8 @@
             </div>
 
 
+            <!-- Phone -->
+
             <div class="form-group">
 
                 <label for="booking-phone">
@@ -845,6 +1024,8 @@
             </div>
 
 
+            <!-- Email -->
+
             <div class="form-group">
 
                 <label for="booking-email">
@@ -860,6 +1041,8 @@
 
             </div>
 
+
+            <!-- Message -->
 
             <div class="form-group">
 
@@ -877,6 +1060,8 @@
             </div>
 
 
+            <!-- Submit -->
+
             <button
                 type="submit"
                 class="btn btn-primary"
@@ -890,5 +1075,5 @@
 
 </section>
 
-{% endblock %}
 
+{% endblock %}
