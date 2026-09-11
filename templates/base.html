@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}AJ Developers{% endblock %}</title>
+
+    <meta
+        name="description"
+        content="{% block meta_description %}AJ Developers - Developing Spaces, Enriching Lives.{% endblock %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+
+        <div class="container nav-container">
+
+            <a href="{% url 'home' %}" class="brand-logo">
+                <img
+                    src="{% static 'images/logo.png' %}"
+                    alt="AJ Developers"
+                >
+            </a>
+
+            <nav class="main-nav">
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'projects' %}">
+                    Projects
+                </a>
+
+                <a href="#">
+                    About Us
+                </a>
+
+                <a href="#">
+                    Contact
+                </a>
+
+                <a
+                    href="https://wa.me/918977914586"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="nav-whatsapp"
+                    aria-label="WhatsApp AJ Developers"
+                    title="WhatsApp AJ Developers"
+                >
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>
+                © {% now "Y" %} AJ Developers.
+                Developing Spaces, Enriching Lives.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener("scroll", function () {
+            const header = document.querySelector(".site-header");
+
+            if (window.scrollY > 60) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        });
+    </script>
+
+</body>
+</html>

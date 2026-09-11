@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}
+Projects | AJ Developers
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <h1>Our Projects</h1>
+        <p>
+            Explore projects developed and marketed by AJ Developers.
+        </p>
+    </div>
+</section>
+
+
+<section class="projects-section">
+    <div class="container">
+
+        {% if projects %}
+
+            <div class="project-grid">
+
+                {% for project in projects %}
+
+                    <article class="project-card">
+
+                        {% if project.layout_image %}
+                            <img
+                                src="{{ project.layout_image.url }}"
+                                alt="{{ project.name }}"
+                            >
+                        {% endif %}
+
+                        <div class="project-card-content">
+
+                            <h2>{{ project.name }}</h2>
+
+                            <p class="project-location">
+                                {{ project.location }}
+                            </p>
+
+                            {% if project.description %}
+                                <p>
+                                    {{ project.description|truncatewords:25 }}
+                                </p>
+                            {% endif %}
+
+                            <a
+                                href="{% url 'project_detail' project.slug %}"
+                                class="btn"
+                            >
+                                View Project
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <p>No projects are currently available.</p>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

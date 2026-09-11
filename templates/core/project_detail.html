@@ -1,0 +1,894 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ project.seo_title|default:project.name }} | AJ Developers
+{% endblock %}
+
+{% block meta_description %}
+{{ project.meta_description|default:project.description }}
+{% endblock %}
+
+{% block content %}
+
+<!-- Project Hero -->
+<section class="project-detail-hero">
+    <div class="container">
+
+        <p class="project-type">
+            {{ project.get_property_type_display }}
+        </p>
+
+        <h1>{{ project.name }}</h1>
+
+        <p class="project-location">
+            {{ project.location }}
+        </p>
+
+    </div>
+</section>
+
+
+<!-- Project Overview -->
+<section class="project-overview">
+    <div class="container">
+
+        <h2>Project Overview</h2>
+
+        {% if project.description %}
+            <p>{{ project.description }}</p>
+        {% endif %}
+
+        {% if project.location_description %}
+            <p>{{ project.location_description }}</p>
+        {% endif %}
+
+    </div>
+</section>
+
+
+<!-- Project Highlights -->
+{% if project.highlights %}
+<section class="project-section">
+    <div class="container">
+
+        <h2>Project Highlights</h2>
+
+        <p>{{ project.highlights }}</p>
+
+    </div>
+</section>
+{% endif %}
+
+
+<!-- Amenities -->
+{% if project.amenities.all %}
+<section class="project-section">
+    <div class="container">
+
+        <h2>Amenities</h2>
+
+        <div class="amenities-grid">
+
+            {% for amenity in project.amenities.all %}
+
+                <div class="amenity-card">
+                    <h3>{{ amenity.name }}</h3>
+
+                    {% if amenity.description %}
+                        <p>{{ amenity.description }}</p>
+                    {% endif %}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+{% endif %}
+
+
+<!-- Location -->
+<section class="project-section">
+    <div class="container">
+
+        <h2>Location</h2>
+
+        <p>{{ project.location }}</p>
+
+        {% if project.google_maps_url %}
+            <a
+                href="{{ project.google_maps_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn"
+            >
+                View on Google Maps
+            </a>
+        {% endif %}
+
+    </div>
+</section>
+
+
+<!-- Approvals -->
+{% if project.approvals.all %}
+<section class="project-section">
+    <div class="container">
+
+        <h2>Approvals & Legal Information</h2>
+
+        <div class="approval-list">
+
+            {% for approval in project.approvals.all %}
+
+                <div class="approval-card">
+
+                    <h3>{{ approval.approval_type }}</h3>
+
+                    {% if approval.authority %}
+                        <p>
+                            <strong>Authority:</strong>
+                            {{ approval.authority }}
+                        </p>
+                    {% endif %}
+
+                    {% if approval.approval_number %}
+                        <p>
+                            <strong>Reference:</strong>
+                            {{ approval.approval_number }}
+                        </p>
+                    {% endif %}
+
+                    {% if approval.description %}
+                        <p>{{ approval.description }}</p>
+                    {% endif %}
+
+                    {% if approval.document %}
+                        <a
+                            href="{{ approval.document.url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            View Document
+                        </a>
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+{% endif %}
+
+
+<!-- Gallery -->
+{% if project.images.all %}
+<section class="project-section">
+    <div class="container">
+
+        <h2>Gallery</h2>
+
+        <div class="gallery-grid">
+
+            {% for image in project.images.all %}
+
+                <figure class="gallery-item">
+
+                    <img
+                        src="{{ image.image.url }}"
+                        alt="{{ image.title|default:project.name }}"
+                    >
+
+                    {% if image.caption %}
+                        <figcaption>
+                            {{ image.caption }}
+                        </figcaption>
+                    {% endif %}
+
+                </figure>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+{% endif %}
+
+
+<!-- Videos -->
+{% if project.videos.all %}
+<section class="project-section">
+    <div class="container">
+
+        <h2>Videos</h2>
+
+        <div class="video-list">
+
+            {% for video in project.videos.all %}
+
+                <div class="video-card">
+
+                    <h3>{{ video.title }}</h3>
+
+                    {% if video.description %}
+                        <p>{{ video.description }}</p>
+                    {% endif %}
+
+                    <a
+                        href="{{ video.youtube_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn"
+                    >
+                        Watch Video
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+{% endif %}
+
+
+<!-- Layout -->
+{% if project.layout_image %}
+<section class="project-section">
+    <div class="container">
+
+        <h2>Layout</h2>
+
+        <img
+            src="{{ project.layout_image.url }}"
+            alt="{{ project.name }} layout"
+            class="layout-image"
+        >
+
+    </div>
+</section>
+{% endif %}
+
+
+<!-- Brochure -->
+{% if project.brochure %}
+<section class="project-section">
+    <div class="container">
+
+        <h2>Project Brochure</h2>
+
+        <a
+            href="{{ project.brochure.url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn"
+        >
+            View Brochure
+        </a>
+
+    </div>
+</section>
+{% endif %}
+
+
+<!-- Enquiry -->
+<section class="project-cta enquiry-section" id="enquiry">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                Enquire Now
+            </p>
+
+            <h2>
+                Interested in {{ project.name }}?
+            </h2>
+
+            <p>
+                Share your details and our team will get in touch
+                with you regarding the project.
+            </p>
+
+        </div>
+
+
+        {% if request.GET.enquiry == "success" %}
+
+            <div class="enquiry-success">
+
+                <h3>
+                    Thank you for your enquiry.
+                </h3>
+
+                <p>
+                    Your enquiry has been received.
+                    AJ Developers will contact you shortly.
+                </p>
+
+            </div>
+
+        {% else %}
+
+            {% if enquiry_error %}
+
+                <div class="enquiry-error">
+                    {{ enquiry_error }}
+                </div>
+
+            {% endif %}
+
+
+            <form
+                method="post"
+                action="{% url 'project_enquiry' project.slug %}"
+                class="enquiry-form"
+            >
+
+                {% csrf_token %}
+
+
+                <div class="form-grid">
+
+
+                    <!-- Name -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            maxlength="200"
+                            required
+                            autocomplete="name"
+                        >
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone *
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            maxlength="20"
+                            required
+                            autocomplete="tel"
+                        >
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            maxlength="254"
+                            autocomplete="email"
+                        >
+
+                    </div>
+
+
+                    <!-- Interested Plot -->
+
+                    {% with plots=project.plots.all %}
+
+                        {% if plots %}
+
+                            <div class="form-group">
+
+                                <label for="interested_plot">
+                                    Interested Plot
+                                </label>
+
+                                <select
+                                    id="interested_plot"
+                                    name="interested_plot"
+                                >
+
+                                    <option value="">
+                                        Select plot (optional)
+                                    </option>
+
+                                    {% for plot in plots %}
+
+                                        <option value="{{ plot.id }}">
+                                            Plot {{ plot.plot_number }}
+                                        </option>
+
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endwith %}
+
+
+                    <!-- Message -->
+
+                    <div class="form-group form-group-full">
+
+                        <label for="message">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="5"
+                            placeholder="Tell us what you'd like to know..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- WhatsApp Permission -->
+
+                    <div class="form-group form-group-full">
+
+                        <label class="checkbox-label">
+
+                            <input
+                                type="checkbox"
+                                name="whatsapp_opt_in"
+                            >
+
+                            <span>
+                                You may contact me on WhatsApp regarding
+                                this enquiry.
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn"
+                >
+                    Submit Enquiry
+                </button>
+
+            </form>
+
+        {% endif %}
+
+
+        <!-- Direct Contact -->
+
+        <div class="enquiry-direct-contact">
+
+            <p>
+                Prefer to contact us directly?
+            </p>
+
+
+            <a
+                href="tel:+918977914586"
+                class="btn"
+            >
+                Call AJ Developers
+            </a>
+
+
+            <a
+                href="https://wa.me/918977914586?text=Hi%20AJ%20Developers%2C%20I%20am%20interested%20in%20{{ project.name|urlencode }}."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn"
+            >
+                WhatsApp Us
+            </a>
+
+                <div class="enquiry-direct-contact">
+
+            ...
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Site Visit -->
+<section class="project-cta site-visit-section" id="site-visit">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                Site Visit
+            </p>
+
+            <h2>
+                Schedule a Site Visit
+            </h2>
+
+            <p>
+                Interested in visiting {{ project.name }}?
+                Share your preferred date and our team will get in touch
+                with you to confirm the visit.
+            </p>
+
+        </div>
+
+
+        {% if request.GET.site_visit == "success" %}
+
+            <div class="enquiry-success">
+
+                <h3>
+                    Site visit request received.
+                </h3>
+
+                <p>
+                    Thank you. AJ Developers will contact you shortly
+                    to confirm your site visit.
+                </p>
+
+            </div>
+
+        {% else %}
+
+            {% if site_visit_error %}
+
+                <div class="enquiry-error">
+                    {{ site_visit_error }}
+                </div>
+
+            {% endif %}
+
+
+            <form
+                method="post"
+                action="{% url 'project_site_visit' project.slug %}"
+                class="enquiry-form"
+            >
+
+                {% csrf_token %}
+
+
+                <div class="form-grid">
+
+
+                    <!-- Name -->
+
+                    <div class="form-group">
+
+                        <label for="site_name">
+                            Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="site_name"
+                            name="name"
+                            maxlength="200"
+                            required
+                            autocomplete="name"
+                        >
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div class="form-group">
+
+                        <label for="site_phone">
+                            Phone *
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="site_phone"
+                            name="phone"
+                            maxlength="20"
+                            required
+                            autocomplete="tel"
+                        >
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="site_email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="site_email"
+                            name="email"
+                            maxlength="254"
+                            autocomplete="email"
+                        >
+
+                    </div>
+
+
+                    <!-- Preferred Date -->
+
+                    <div class="form-group">
+
+                        <label for="preferred_date">
+                            Preferred Date *
+                        </label>
+
+                        <input
+                            type="date"
+                            id="preferred_date"
+                            name="preferred_date"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Preferred Time -->
+
+                    <div class="form-group">
+
+                        <label for="preferred_time">
+                            Preferred Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="preferred_time"
+                            name="preferred_time"
+                        >
+
+                    </div>
+
+
+                    <!-- Message -->
+
+                    <div class="form-group form-group-full">
+
+                        <label for="site_message">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="site_message"
+                            name="message"
+                            rows="5"
+                            placeholder="Any preferred timing or questions..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn"
+                >
+                    Request Site Visit
+                </button>
+
+            </form>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+<!-- Mobile Fixed CTA -->
+<div class="mobile-fixed-cta">
+
+    <a
+        href="tel:+918977914586"
+        class="mobile-cta-item"
+        aria-label="Call AJ Developers"
+    >
+        <i class="fa-solid fa-phone"></i>
+        <span>Call</span>
+    </a>
+
+
+    <a
+        href="https://wa.me/918977914586?text=Hi%20AJ%20Developers%2C%20I%20am%20interested%20in%20{{ project.name|urlencode }}."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mobile-cta-item"
+        aria-label="WhatsApp AJ Developers"
+    >
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>WhatsApp</span>
+    </a>
+
+
+    <a
+        href="#site-visit"
+        class="mobile-cta-item"
+        aria-label="Schedule a site visit"
+    >
+        <i class="fa-regular fa-calendar"></i>
+        <span>Site Visit</span>
+    </a>
+
+</div>
+
+<section class="project-cta booking-section" id="booking">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                BOOKING REQUEST
+            </p>
+
+            <h2>
+                Request to Book
+            </h2>
+
+            <p>
+                Interested in this project?
+                Submit your details and our team will contact you
+                to discuss the next steps.
+            </p>
+
+        </div>
+
+
+        {% if request.GET.booking == "success" %}
+
+            <div class="form-success">
+                Your booking request has been received.
+                Our team will contact you shortly.
+            </div>
+
+        {% elif request.GET.booking == "already_requested" %}
+
+            <div class="form-success">
+                Your booking request has already been received.
+                Our team will contact you shortly.
+            </div>
+
+        {% endif %}
+
+
+        {% if booking_error %}
+
+            <div class="form-error">
+                {{ booking_error }}
+            </div>
+
+        {% endif %}
+
+
+        <form
+            method="post"
+            action="{% url 'project_booking_request' project.slug %}"
+            class="enquiry-form"
+        >
+
+            {% csrf_token %}
+
+
+            <div class="form-group">
+
+                <label for="booking-name">
+                    Name
+                </label>
+
+                <input
+                    type="text"
+                    id="booking-name"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="booking-phone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="booking-phone"
+                    name="phone"
+                    placeholder="Your phone number"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="booking-email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="booking-email"
+                    name="email"
+                    placeholder="Your email address"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="booking-message">
+                    Message
+                </label>
+
+                <textarea
+                    id="booking-message"
+                    name="message"
+                    rows="4"
+                    placeholder="Any questions or requirements?"
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Submit Booking Request
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}
+

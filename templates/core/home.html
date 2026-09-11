@@ -1,23 +1,543 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
 
-    <title>AJ Developers</title>
+{% load static %}
 
-    {% load static %}
+{% block title %}
+AJ Developers | Developing Spaces, Enriching Lives.
+{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
+{% block content %}
 
-<body>
+<!-- =========================================================
+     HERO
+     ========================================================= -->
 
-    <h1>AJ Developers</h1>
+<section class="hero">
 
-    <p>Developing Spaces, Enriching Lives.</p>
+    <div class="hero-background"></div>
 
-    <p>Welcome to AJ Developers.</p>
+    <div class="container hero-content">
 
-</body>
-</html>
+        <!-- Hero Main Content -->
+        <div class="hero-main">
+
+            <h1>
+                Developing Spaces,
+                <span>Enriching Lives.</span>
+            </h1>
+
+            <p class="hero-description">
+                Discover thoughtfully developed spaces in Hyderabad
+                and surrounding areas.
+            </p>
+
+            <div class="hero-actions">
+
+                <a
+                    href="{% url 'projects' %}"
+                    class="btn btn-primary"
+                >
+                    Explore Projects
+                </a>
+
+                <a
+                    href="https://wa.me/918977914586?text=Hi%20AJ%20Developers%2C%20I%20would%20like%20to%20schedule%20a%20site%20visit."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-outline"
+                >
+                    Schedule a Site Visit
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             HERO SIDE MESSAGE
+             ===================================================== -->
+
+        <div class="hero-message">
+
+            <span>
+                Prime Locations
+            </span>
+
+            <strong>
+                for a Brighter Future
+            </strong>
+
+            <div class="hero-message-line"></div>
+
+            <!-- Transparent AJ Developers logo -->
+            <img
+                src="{% static 'images/coverlogo.png' %}"
+                alt="AJ Developers"
+                class="hero-message-logo"
+            >
+
+        </div>
+
+
+        <!-- =====================================================
+             HERO PROPERTY CATEGORIES
+             ===================================================== -->
+
+        <div class="hero-categories">
+
+            <div class="hero-category">
+
+                <div class="hero-category-icon">
+                    🌿
+                </div>
+
+                <span>
+                    Open Plots
+                </span>
+
+            </div>
+
+
+            <div class="hero-category">
+
+                <div class="hero-category-icon">
+                    ⌂
+                </div>
+
+                <span>
+                    Residential<br>
+                    Developments
+                </span>
+
+            </div>
+
+
+            <div class="hero-category">
+
+                <div class="hero-category-icon">
+                    ▥
+                </div>
+
+                <span>
+                    Commercial<br>
+                    Spaces
+                </span>
+
+            </div>
+
+
+            <div class="hero-category">
+
+                <div class="hero-category-icon">
+                    ◉
+                </div>
+
+                <span>
+                    Hyderabad &<br>
+                    Surrounding Areas
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             TRUST STATEMENT
+             ===================================================== -->
+
+        <div class="hero-trust">
+
+            <span>TRUST</span>
+            <span>|</span>
+            <span>QUALITY</span>
+            <span>|</span>
+            <span>GROWTH</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FEATURED PROJECTS
+     ========================================================= -->
+
+<section class="projects-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                Our Projects
+            </p>
+
+            <h2>
+                Featured Projects
+            </h2>
+
+            <p>
+                Explore our thoughtfully planned real estate projects
+                across Hyderabad and surrounding areas.
+            </p>
+
+        </div>
+
+
+        {% if projects %}
+
+        <div class="project-grid">
+
+            {% for project in projects|slice:":6" %}
+
+            <article class="project-card">
+
+                {% if project.layout_image %}
+
+                <img
+                    src="{{ project.layout_image.url }}"
+                    alt="{{ project.name }}"
+                >
+
+                {% endif %}
+
+
+                <div class="project-card-content">
+
+                    <p class="project-type">
+                        {{ project.get_property_type_display }}
+                    </p>
+
+                    <h3>
+                        {{ project.name }}
+                    </h3>
+
+                    <p class="project-location">
+                        {{ project.location }}
+                    </p>
+
+
+                    {% if project.description %}
+
+                    <p>
+                        {{ project.description|truncatewords:20 }}
+                    </p>
+
+                    {% endif %}
+
+
+                    <a
+                        href="{% url 'project_detail' project.slug %}"
+                        class="btn"
+                    >
+                        View Project
+                    </a>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="section-action">
+
+            <a
+                href="{% url 'projects' %}"
+                class="btn"
+            >
+                View All Projects
+            </a>
+
+        </div>
+
+
+        {% else %}
+
+        <p>
+            Our projects will be available here soon.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     WHY AJ DEVELOPERS
+     ========================================================= -->
+
+<section class="project-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                Why AJ Developers
+            </p>
+
+            <h2>
+                Building With Purpose
+            </h2>
+
+            <p>
+                We focus on creating thoughtfully planned spaces
+                with attention to location, connectivity and long-term value.
+            </p>
+
+        </div>
+
+
+        <div class="amenities-grid">
+
+            <div class="amenity-card">
+
+                <h3>
+                    Strategic Locations
+                </h3>
+
+                <p>
+                    Projects selected with connectivity and
+                    surrounding development in mind.
+                </p>
+
+            </div>
+
+
+            <div class="amenity-card">
+
+                <h3>
+                    Thoughtful Planning
+                </h3>
+
+                <p>
+                    Well-planned spaces designed with practical
+                    residential needs in mind.
+                </p>
+
+            </div>
+
+
+            <div class="amenity-card">
+
+                <h3>
+                    Transparent Information
+                </h3>
+
+                <p>
+                    Clear project information and documentation
+                    to help customers make informed decisions.
+                </p>
+
+            </div>
+
+
+            <div class="amenity-card">
+
+                <h3>
+                    Customer Focus
+                </h3>
+
+                <p>
+                    From enquiry to site visit, we aim to provide
+                    a simple and responsive experience.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     LOCATION & CONNECTIVITY
+     ========================================================= -->
+
+<section class="project-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                Location
+            </p>
+
+            <h2>
+                Connected To What Matters
+            </h2>
+
+            <p>
+                Our projects are selected with access to key roads,
+                neighbourhoods, schools, workplaces and essential
+                facilities in mind.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SITE VISIT CTA
+     ========================================================= -->
+
+<section class="project-cta">
+
+    <div class="container">
+
+        <p class="section-label">
+            Plan A Visit
+        </p>
+
+        <h2>
+            See Your Future Space In Person
+        </h2>
+
+        <p>
+            Interested in one of our projects?
+            Contact AJ Developers to learn more or arrange a site visit.
+        </p>
+
+
+        <a
+            href="tel:+918977914586"
+            class="btn"
+        >
+            Call AJ Developers
+        </a>
+
+
+        <a
+            href="https://wa.me/918977914586?text=Hi%20AJ%20Developers%2C%20I%20would%20like%20to%20know%20more%20about%20your%20projects."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn"
+        >
+            WhatsApp Us
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT
+     ========================================================= -->
+
+<section class="project-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                About AJ Developers
+            </p>
+
+            <h2>
+                Developing Spaces, Enriching Lives.
+            </h2>
+
+            <p>
+                AJ Developers develops and markets real estate projects
+                with a focus on thoughtfully planned spaces, strategic
+                locations and a customer-focused experience.
+            </p>
+
+
+            <a
+                href="#"
+                class="btn"
+            >
+                Learn More
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+     ========================================================= -->
+
+<section class="project-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                Contact Us
+            </p>
+
+            <h2>
+                Let's Talk About Your Next Space
+            </h2>
+
+            <p>
+                Have a question about a project or want to arrange
+                a site visit? Get in touch with AJ Developers.
+            </p>
+
+        </div>
+
+
+        <p>
+
+            <strong>
+                Phone:
+            </strong>
+
+            <a href="tel:+918977914586">
+                8977914586
+            </a>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Email:
+            </strong>
+
+            <a href="mailto:jaladankiashokreddy@gmail.com">
+                jaladankiashokreddy@gmail.com
+            </a>
+
+        </p>
+
+
+        <a
+            href="https://wa.me/918977914586?text=Hi%20AJ%20Developers%2C%20I%20would%20like%20to%20make%20an%20enquiry."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn"
+        >
+            WhatsApp AJ Developers
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

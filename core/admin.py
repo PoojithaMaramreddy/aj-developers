@@ -114,9 +114,26 @@ class PlotAdmin(admin.ModelAdmin):
     readonly_fields = ("created_at",)
     list_select_related = ("project",)
 
+class SiteVisitInline(admin.TabularInline):
+    model = SiteVisit
+    extra = 0
+    readonly_fields = ("created_at", "updated_at")
+
+
+class BookingRequestInline(admin.TabularInline):
+    model = BookingRequest
+    extra = 0
+    readonly_fields = ("created_at", "updated_at")
+
+
+class LeadFollowUpInline(admin.TabularInline):
+    model = LeadFollowUp
+    extra = 0
+    readonly_fields = ("created_at",)
 
 @admin.register(Lead)
 class LeadAdmin(admin.ModelAdmin):
+
     list_display = (
         "name",
         "phone",
@@ -127,11 +144,13 @@ class LeadAdmin(admin.ModelAdmin):
         "whatsapp_opt_in",
         "created_at",
     )
+
     list_filter = (
         "source",
         "status",
         "whatsapp_opt_in",
     )
+
     search_fields = (
         "name",
         "phone",
@@ -139,11 +158,22 @@ class LeadAdmin(admin.ModelAdmin):
         "interested_project__name",
         "interested_plot__plot_number",
     )
-    readonly_fields = ("created_at", "updated_at")
+
+    readonly_fields = (
+        "created_at",
+        "updated_at",
+    )
+
     list_select_related = (
         "interested_project",
         "interested_plot",
     )
+
+    inlines = [
+        SiteVisitInline,
+        BookingRequestInline,
+        LeadFollowUpInline,
+    ]
 
 
 @admin.register(SiteVisit)
