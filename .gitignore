@@ -36,3 +36,4 @@ htmlcov/
 
 # Local development
 *.sqlite3
+ajdevelopers_backup.sql
