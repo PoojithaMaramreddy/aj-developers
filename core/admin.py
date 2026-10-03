@@ -6,7 +6,6 @@ from .models import (
     ProjectVideo,
     Amenity,
     ProjectApproval,
-    Plot,
     Lead,
     SiteVisit,
     BookingRequest,
@@ -54,21 +53,6 @@ class ProjectApprovalInline(admin.TabularInline):
     readonly_fields = ("created_at",)
     ordering = ("display_order",)
 
-
-class PlotInline(admin.TabularInline):
-    model = Plot
-    extra = 0
-    fields = (
-        "plot_number",
-        "plot_size",
-        "dimension",
-        "facing",
-        "block",
-        "layout_position",
-    )
-    readonly_fields = ("created_at",)
-    ordering = ("plot_number",)
-
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = (
@@ -88,7 +72,6 @@ class ProjectAdmin(admin.ModelAdmin):
         ProjectVideoInline,
         AmenityInline,
         ProjectApprovalInline,
-        PlotInline,
     ]
 
 
@@ -153,27 +136,6 @@ class ProjectApprovalAdmin(admin.ModelAdmin):
     readonly_fields = ("created_at",)
     list_select_related = ("project",)
 
-
-@admin.register(Plot)
-class PlotAdmin(admin.ModelAdmin):
-    list_display = (
-        "project",
-        "plot_number",
-        "plot_size",
-        "dimension",
-        "facing",
-        "block",
-    )
-    list_filter = ("project", "facing", "block")
-    search_fields = (
-        "project__name",
-        "plot_number",
-        "plot_size",
-        "facing",
-    )
-    readonly_fields = ("created_at",)
-    list_select_related = ("project",)
-
 class SiteVisitInline(admin.TabularInline):
     model = SiteVisit
     extra = 0
@@ -198,7 +160,6 @@ class LeadAdmin(admin.ModelAdmin):
         "name",
         "phone",
         "interested_project",
-        "interested_plot",
         "source",
         "status",
         "whatsapp_opt_in",
@@ -216,7 +177,6 @@ class LeadAdmin(admin.ModelAdmin):
         "phone",
         "email",
         "interested_project__name",
-        "interested_plot__plot_number",
     )
 
     readonly_fields = (
@@ -226,7 +186,6 @@ class LeadAdmin(admin.ModelAdmin):
 
     list_select_related = (
         "interested_project",
-        "interested_plot",
     )
 
     inlines = [
@@ -265,7 +224,6 @@ class BookingRequestAdmin(admin.ModelAdmin):
     list_display = (
         "lead",
         "project",
-        "plot",
         "status",
         "created_at",
     )
@@ -277,10 +235,9 @@ class BookingRequestAdmin(admin.ModelAdmin):
         "lead__name",
         "lead__phone",
         "project__name",
-        "plot__plot_number",
     )
     readonly_fields = ("created_at", "updated_at")
-    list_select_related = ("lead", "project", "plot")
+    list_select_related = ("lead", "project")
 
 
 @admin.register(SalesAgent)

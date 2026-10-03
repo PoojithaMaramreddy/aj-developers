@@ -94,9 +94,9 @@ Customers should contact AJ Developers for current pricing.
 
 ---
 
-## 5. Plot Availability Requirements
+## 5. Project Availability Requirements
 
-Public plot availability has intentionally been removed.
+The website will not provide public real-time availability management.
 
 The website must NOT provide:
 
@@ -107,10 +107,10 @@ The website must NOT provide:
 
 Customers can:
 
-* Ask about a specific plot
 * Submit an enquiry
 * Request a site visit
 * Submit a booking request
+* Contact AJ Developers for current availability and project details
 
 Actual availability will be confirmed by AJ Developers.
 
@@ -127,8 +127,8 @@ Each project should support:
 * Location description
 * Nearby landmarks
 * Total project area
-* Number of plots
-* Plot sizes
+* Number of plots where applicable
+* Plot sizes or project configuration where applicable
 * Project description
 * Highlights / USPs
 * Amenities
@@ -147,6 +147,8 @@ Each project should support:
 * Call
 * Booking request
 * Project-specific content
+
+Individual plot records, plot selection and plot inventory management are outside the current system scope.
 
 ---
 
@@ -238,7 +240,7 @@ Each project page should contain:
 * Site Visit
 * Booking Request
 
-The project page must NOT show public pricing or public plot availability.
+The project page must NOT show public pricing or public real-time availability.
 
 ---
 
@@ -251,35 +253,27 @@ Primary actions:
 * Enquire Now
 * Book a Site Visit
 * Request a Callback
-* Ask About This Plot
 * Register Interest
-* Book This Plot
+* Submit Booking Request
 * Download Brochure
 * View Layout
 * View Location
 
 ---
 
-## 12. Plot-Specific Enquiry
+## 12. General Project Enquiry
 
-If a customer is viewing a specific plot and selects:
+Customers can submit an enquiry regarding a project.
 
-**Ask About This Plot**
-
-the enquiry should carry:
+The enquiry should carry:
 
 * Project
-* Plot number
 * Customer details
-* Enquiry/interest type
+* Enquiry message
+* Source
+* WhatsApp opt-in where applicable
 
-Example:
-
-`Project: ABC Project`
-
-`Plot: 42`
-
-`Interest: Plot Enquiry`
+The system does not require individual plot selection or plot-specific enquiry records.
 
 ---
 
@@ -314,7 +308,7 @@ Phase 1 supports a booking request, not online payment.
 
 Flow:
 
-Select Plot → Book This Plot → Submit Details → Booking Request → AJ Developers Contact → Confirmation & Documentation
+Select Project → Submit Details → Booking Request → AJ Developers Contact → Confirmation & Documentation
 
 Booking request statuses:
 
@@ -325,6 +319,8 @@ Booking request statuses:
 * Cancelled
 
 A booking request must not be treated as a final legal or payment confirmation.
+
+Individual plot selection is outside the current booking workflow.
 
 ---
 
@@ -337,11 +333,10 @@ Lead information should include:
 * Email where provided
 * Source
 * Interested project
-* Interested plot where applicable
 * Message
 * Status
 * WhatsApp opt-in
-* Assigned sales person
+* Assigned sales person where applicable
 * Created date
 * Updated date
 
@@ -415,20 +410,15 @@ Customers must have an appropriate opt-out/unsubscribe mechanism.
 
 WhatsApp Business is the primary communication channel.
 
-Phase 1:
+### Phase 1
 
 * Click-to-chat
 * Floating WhatsApp button
 * Header WhatsApp button
 * Project-specific messages
-* Plot-specific messages
 * Site visit messages
 * Booking enquiry messages
 * Register-interest messages
-
-Official WhatsApp number:
-
-`8977914586`
 
 Future:
 
@@ -453,7 +443,6 @@ Admin should manage:
 * Amenities
 * Approvals
 * Layouts
-* Plots
 * Leads
 * Site visits
 * Booking requests
@@ -463,6 +452,8 @@ Admin should manage:
 * Basic analytics
 
 Routine content updates should not require developer/code changes.
+
+Individual plot records and plot inventory management are not part of the current admin system.
 
 ---
 

@@ -376,7 +376,7 @@ Page structure:
 3. Key Highlights
 4. Amenities
 5. Location & Connectivity
-6. Layout
+6. Project Layout
 7. Approvals / Legal Information
 8. Gallery
 9. Videos
@@ -403,7 +403,7 @@ Project hero contains:
 
 Public project pricing will not be displayed.
 
-Public plot availability will not be displayed.
+Public real-time project availability will not be displayed.
 
 ---
 
@@ -414,27 +414,23 @@ Projects may include:
 - Layout image
 - Layout PDF
 - Roads
-- Plot numbers
+- Project-level layout information
 - Amenities
-- Blocks
 - Important landmarks
 
-Future enhancement:
+The layout is presented for informational purposes.
 
-Clickable interactive plot layout.
+The website will not provide:
 
-A visitor may select a plot and choose:
+- Individual plot selection
+- Interactive plot inventory
+- Plot number selection
+- Available / Reserved / Sold plot status
+- Plot-specific booking
 
-`Ask About This Plot`
+Any project-level information such as the total number of plots may be displayed where relevant.
 
-The enquiry should capture:
-
-- Project
-- Plot number
-- Customer details
-- Message
-
-There will be no public Available / Reserved / Sold status in Phase 1.
+Current availability and booking information will be confirmed directly by AJ Developers.
 
 ---
 
@@ -456,7 +452,6 @@ Fields:
 - Mobile Number
 - Email (optional)
 - Interested Project
-- Plot Number (optional)
 - Message
 - WhatsApp communication consent where applicable
 
@@ -479,11 +474,13 @@ Fields:
 
 Flow:
 
-Select Project → Select Plot → Submit Details → Booking Request → AJ Developers Contact → Confirmation & Documentation
+Select Project → Submit Details → Booking Request → AJ Developers Contact → Confirmation & Documentation
 
 A booking request is not an automatic final booking confirmation.
 
 No online payment will be implemented in Phase 1.
+
+Individual plot selection is outside the current system scope.
 
 ---
 
@@ -498,8 +495,7 @@ Primary CTAs:
 - Book a Site Visit
 - Request a Callback
 - Register Interest
-- Ask About This Plot
-- Book This Plot
+- Submit Booking Request
 - Download Brochure
 
 Avoid:
@@ -509,7 +505,7 @@ Avoid:
 - EMI Calculator
 - Loan Calculator
 
-because public availability and finance tools are not part of Phase 1.
+because individual plot inventory/selection, public availability and finance tools are not part of Phase 1.
 
 ---
 
@@ -625,6 +621,8 @@ Reusable UI components should include:
 - Approval section
 - Project CTA
 
+The layout viewer is informational and does not provide individual plot selection.
+
 ---
 
 # 16. Accessibility
@@ -713,7 +711,8 @@ The website should not be overloaded with:
 - Fake statistics
 - Unsupported investment claims
 - Public pricing
-- Public availability
+- Public real-time availability
+- Individual plot selection
 - Unnecessary calculators
 
 ---
@@ -731,5 +730,6 @@ Step 3 — Design:
 - CTA strategy: Approved
 - No public pricing: Locked
 - No public availability: Locked
+- No individual plot selection: Locked
 - No EMI/loan calculator: Locked
 - Component-based UI: Locked

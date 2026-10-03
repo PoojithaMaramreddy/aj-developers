@@ -33,13 +33,13 @@ The project follows seven major phases:
 
 Identify and document:
 
-* Business requirements
-* Customer requirements
-* Functional requirements
-* Non-functional requirements
-* Legal requirements
-* Security requirements
-* Business workflows
+- Business requirements
+- Customer requirements
+- Functional requirements
+- Non-functional requirements
+- Legal requirements
+- Security requirements
+- Business workflows
 
 Status: **Completed**
 
@@ -49,15 +49,15 @@ Status: **Completed**
 
 Define:
 
-* Technology direction
-* Architecture approach
-* Database planning
-* Feature scope
-* Admin requirements
-* Communication strategy
-* Analytics
-* Testing
-* Deployment approach
+- Technology direction
+- Architecture approach
+- Database planning
+- Feature scope
+- Admin requirements
+- Communication strategy
+- Analytics
+- Testing
+- Deployment approach
 
 Status: **Completed**
 
@@ -67,41 +67,43 @@ Status: **Completed**
 
 Define:
 
-* Sitemap
-* Page layouts
-* Wireframes
-* UI/UX
-* Design system
-* Typography
-* Colours
-* Components
-* Responsive behaviour
-* Navigation
-* CTA placement
+- Sitemap
+- Page layouts
+- Wireframes
+- UI/UX
+- Design system
+- Typography
+- Colours
+- Components
+- Responsive behaviour
+- Navigation
+- CTA placement
 
-Status: **Next**
+Status: **Completed**
 
 ---
 
 ### Step 4 — Implementation
 
-Build:
+Build and integrate:
 
-* Django application
-* Database models
-* Django ORM queries
-* Website pages
-* Forms
-* Admin
-* Lead management
-* Site visits
-* Booking requests
-* WhatsApp integration
-* Analytics
-* SEO
-* Security
+- Django application
+- Database models
+- Django ORM queries
+- Website pages
+- Customer enquiry workflows
+- Admin
+- Lead management
+- Site visits
+- Booking requests
+- WhatsApp integration
+- Analytics
+- SEO
+- Security
 
-Status: **Pending**
+Current implementation work includes reviewing and hardening the existing foundation before expanding the public website.
+
+Status: **In Progress**
 
 ---
 
@@ -109,23 +111,23 @@ Status: **Pending**
 
 Test:
 
-* Functional features
-* Forms
-* Lead flow
-* Site visit flow
-* Booking flow
-* Admin functionality
-* Permissions
-* Database/ORM
-* Responsive behaviour
-* Browsers
-* Security
-* Performance
-* SEO
-* Links
-* File uploads
-* Backups
-* Production smoke tests
+- Functional features
+- Customer enquiry flow
+- Lead flow
+- Site visit flow
+- Booking flow
+- Admin functionality
+- Permissions
+- Database/ORM
+- Responsive behaviour
+- Browsers
+- Security
+- Performance
+- SEO
+- Links
+- File uploads
+- Backups
+- Production smoke tests
 
 Status: **Pending**
 
@@ -135,15 +137,15 @@ Status: **Pending**
 
 Deploy:
 
-* Application
-* Database
-* Static files
-* Media
-* Domain
-* HTTPS
-* Environment variables
-* Monitoring
-* Backups
+- Application
+- Database
+- Static files
+- Media
+- Domain
+- HTTPS
+- Environment variables
+- Monitoring
+- Backups
 
 Preferred flow:
 
@@ -157,15 +159,15 @@ Status: **Pending**
 
 After launch:
 
-* Security updates
-* Dependency updates
-* Database backups
-* Monitoring
-* Content updates
-* Project updates
-* Performance checks
-* Bug fixes
-* Feature improvements
+- Security updates
+- Dependency updates
+- Database backups
+- Monitoring
+- Content updates
+- Project updates
+- Performance checks
+- Bug fixes
+- Feature improvements
 
 Status: **Pending**
 
@@ -175,26 +177,26 @@ Status: **Pending**
 
 ## Preferred Stack
 
-* Python
-* Django
-* Django ORM
-* MySQL
-* HTML
-* CSS
-* Bootstrap
-* JavaScript where required
+- Python
+- Django
+- Django ORM
+- MySQL
+- HTML
+- CSS
+- Bootstrap
+- JavaScript where required
 
 The stack is a preferred starting point rather than an excuse to avoid better tools.
 
 Technology decisions should be based on:
 
-* Business value
-* Maintainability
-* Cost
-* Development speed
-* Security
-* Scalability
-* Portfolio value
+- Business value
+- Maintainability
+- Cost
+- Development speed
+- Security
+- Scalability
+- Portfolio value
 
 ---
 
@@ -204,16 +206,21 @@ The project should not attempt to code everything from scratch.
 
 Where appropriate, use:
 
-* AI tools
-* APIs
-* Automation platforms
-* Plugins
-* Existing libraries
-* Managed services
-* Cloud services
-* Third-party integrations
+- AI tools
+- APIs
+- Automation platforms
+- Plugins
+- Existing libraries
+- Managed services
+- Cloud services
+- Third-party integrations
+- No-code/low-code solutions
 
 The objective is to build a useful production system rather than maximize the amount of custom code.
+
+Technology should be selected based on practical value, reliability and maintainability.
+
+The project should avoid unnecessary complexity and overengineering.
 
 ---
 
@@ -223,20 +230,20 @@ Start simple.
 
 Initial architecture should preferably be a modular Django application with:
 
-* Django
-* Django ORM
-* MySQL
-* Templates
-* Bootstrap
-* JavaScript where needed
+- Django
+- Django ORM
+- MySQL
+- Templates
+- Bootstrap
+- JavaScript where needed
 
 Avoid unnecessary:
 
-* Microservices
-* Kubernetes
-* Distributed systems
-* Multiple application servers
-* Complex infrastructure
+- Microservices
+- Kubernetes
+- Distributed systems
+- Multiple application servers
+- Complex infrastructure
 
 Complexity should be introduced only when the business requires it.
 
@@ -244,21 +251,24 @@ Complexity should be introduced only when the business requires it.
 
 # 7. Database Planning
 
-Core planned entities:
+Core entities:
 
-* Project
-* ProjectImage
-* ProjectVideo
-* Amenity
-* ProjectApproval
-* Plot
-* Lead
-* SiteVisit
-* BookingRequest
-* SalesAgent
-* LeadFollowUp
-* Campaign
-* CampaignRecipient
+- Project
+- ProjectImage
+- ProjectVideo
+- Amenity
+- ProjectApproval
+- Lead
+- SiteVisit
+- BookingRequest
+- SalesAgent
+- LeadFollowUp
+- Campaign
+- CampaignRecipient
+
+Individual plot records are **not part of the current system scope**.
+
+The system may store project-level information such as the number of plots where relevant to a real estate project, but it will not maintain individual plot records or plot inventory.
 
 Django Models and Django ORM will be the primary database access approach.
 
@@ -272,13 +282,32 @@ The six initial ventures are data records, not separate code modules.
 
 Example concept:
 
+```text
 Project 1
 Project 2
 Project 3
 ...
 Project 6
+```
 
 A future Project 7 should normally be added through the admin interface without modifying application code.
+
+Project-level information may include:
+
+- Project name
+- Property type
+- Location
+- Project description
+- Total area
+- Number of plots where applicable
+- Project highlights
+- Developer/promoter information
+- Location information
+- Images
+- Videos
+- Amenities
+- Approvals
+- SEO information
 
 ---
 
@@ -292,10 +321,10 @@ Initial type:
 
 Future types may include:
 
-* `VILLA`
-* `APARTMENT`
-* `COMMERCIAL`
-* `OTHER`
+- `VILLA`
+- `APARTMENT`
+- `COMMERCIAL`
+- `OTHER`
 
 This allows the system to grow without redesigning the project structure.
 
@@ -309,6 +338,23 @@ Use Django Admin.
 
 Admin should support routine business operations without developer intervention.
 
+Current administration includes:
+
+- Projects
+- Project images
+- Project videos
+- Amenities
+- Project approvals
+- Leads
+- Site visits
+- Booking requests
+- Sales agents
+- Lead follow-ups
+- Campaigns
+- Campaign recipients
+
+Individual plot records and plot inventory management are outside the current admin scope.
+
 A custom dashboard may be developed later if Django Admin becomes insufficient for daily operations.
 
 ---
@@ -317,16 +363,20 @@ A custom dashboard may be developed later if Django Admin becomes insufficient f
 
 The lead system should support:
 
-* Lead capture
-* Lead source tracking
-* Project interest
-* Plot interest
-* Status management
-* Sales-agent assignment
-* Follow-ups
-* Site visits
-* Booking requests
-* Campaign eligibility
+- Lead capture
+- Lead source tracking
+- Project interest
+- Status management
+- Sales-agent assignment
+- Follow-ups
+- Site visits
+- Booking requests
+- Campaign eligibility
+- WhatsApp opt-in tracking
+
+Lead management is project-based.
+
+Individual plot interest and plot selection are outside the current system scope.
 
 Future CRM integration may be added if required.
 
@@ -342,22 +392,27 @@ Use WhatsApp Business and click-to-chat.
 
 Support:
 
-* General enquiry
-* Project enquiry
-* Plot enquiry
-* Site visit
-* Booking enquiry
-* Register interest
+- General enquiry
+- Project enquiry
+- Site visit
+- Booking enquiry
+- Register interest
+- Customer contact
+
+Messages may include relevant project information and the customer's enquiry type.
+
+Individual plot-specific messages and plot-selection workflows are outside the current system scope.
 
 ### Future
 
 Evaluate:
 
-* WhatsApp Business Platform/API
-* CRM integration
-* Automated campaigns
-* Scheduled follow-ups
-* Multiple sales agents
+- WhatsApp Business Platform/API
+- CRM integration
+- Automated campaigns
+- Scheduled follow-ups
+- Multiple sales agents
+- Lead notifications
 
 Automation must comply with WhatsApp policies and customer consent requirements.
 
@@ -375,12 +430,12 @@ Future campaign manager:
 
 Possible audience criteria:
 
-* Interested project
-* Lead status
-* WhatsApp opt-in
-* Campaign eligibility
-* Sales agent
-* Follow-up state
+- Interested project
+- Lead status
+- WhatsApp opt-in
+- Campaign eligibility
+- Sales agent
+- Follow-up state
 
 Automated/bulk WhatsApp communication requires an appropriate official API/provider.
 
@@ -390,28 +445,40 @@ Automated/bulk WhatsApp communication requires an appropriate official API/provi
 
 Initial analytics:
 
-* Visitors
-* Page views
-* Project views
-* Brochure downloads
-* WhatsApp clicks
-* Call clicks
-* Enquiries
-* Site visits
-* Booking requests
+- Visitors
+- Page views
+- Project views
+- Brochure downloads
+- WhatsApp clicks
+- Call clicks
+- Enquiries
+- Site visits
+- Booking requests
 
 Primary funnel:
 
-Visitors → Project Views → Leads → Interested → Site Visits → Booking Requests
+```text
+Visitors
+   ↓
+Project Views
+   ↓
+Leads
+   ↓
+Interested
+   ↓
+Site Visits
+   ↓
+Booking Requests
+```
 
 Future Data Science capabilities may include:
 
-* Lead scoring
-* Conversion analysis
-* Lead-source analysis
-* Follow-up prioritization
-* Campaign performance
-* Sales forecasting
+- Lead scoring
+- Conversion analysis
+- Lead-source analysis
+- Follow-up prioritization
+- Campaign performance
+- Sales forecasting
 
 AI/ML should only be introduced when sufficient clean data and a real business use case exist.
 
@@ -423,11 +490,11 @@ Use one responsive website.
 
 The same application should adapt to:
 
-* Phones
-* Tablets
-* Laptops
-* Desktops
-* Large screens
+- Phones
+- Tablets
+- Laptops
+- Desktops
+- Large screens
 
 No separate mobile/tablet/desktop websites.
 
@@ -439,21 +506,21 @@ Bootstrap can be used as the initial responsive UI framework.
 
 Each project should have:
 
-* SEO title
-* Meta description
-* Slug
-* Proper headings
-* Image alt text
-* Internal links
+- SEO title
+- Meta description
+- Slug
+- Proper headings
+- Image alt text
+- Internal links
 
 Technical SEO should include:
 
-* Sitemap
-* robots.txt
-* Structured data where appropriate
-* Search Console
-* Mobile-friendly design
-* Performance optimization
+- Sitemap
+- `robots.txt`
+- Structured data where appropriate
+- Search Console
+- Mobile-friendly design
+- Performance optimization
 
 ---
 
@@ -461,15 +528,15 @@ Technical SEO should include:
 
 Priorities:
 
-* Optimize images
-* Lazy-load appropriate media
-* Minimize unnecessary JavaScript
-* Optimize database queries
-* Avoid N+1 ORM queries
-* Use `select_related()` where appropriate
-* Use `prefetch_related()` where appropriate
-* Add indexes where useful
-* Introduce caching when justified
+- Optimize images
+- Lazy-load appropriate media
+- Minimize unnecessary JavaScript
+- Optimize database queries
+- Avoid N+1 ORM queries
+- Use `select_related()` where appropriate
+- Use `prefetch_related()` where appropriate
+- Add indexes where useful
+- Introduce caching when justified
 
 Do not introduce advanced optimization before measuring a real need.
 
@@ -485,9 +552,9 @@ Media can initially use local/static storage.
 
 Depending on scale, media may later move to:
 
-* Cloud object storage
-* CDN
-* Image optimization service
+- Cloud object storage
+- CDN
+- Image optimization service
 
 Project videos should preferably be hosted on YouTube and embedded rather than unnecessarily storing large video files on the application server.
 
@@ -513,13 +580,13 @@ Cloud hosting + hosted MySQL
 
 Production requirements:
 
-* HTTPS
-* `DEBUG=False`
-* Secure environment variables
-* Database backups
-* Monitoring
-* Error logging
-* Static/media configuration
+- HTTPS
+- `DEBUG=False`
+- Secure environment variables
+- Database backups
+- Monitoring
+- Error logging
+- Static/media configuration
 
 ---
 
@@ -541,24 +608,24 @@ Domain configuration should be centralized so migration can be performed without
 
 Testing should include:
 
-* Unit tests for critical logic
-* Model tests
-* Form tests
-* View tests
-* Authentication tests
-* Permission tests
-* Lead-flow tests
-* Site-visit tests
-* Booking tests
-* Admin tests
-* Responsive tests
-* Browser tests
-* Security tests
-* Performance tests
-* SEO checks
-* Broken-link checks
-* Backup/restore tests
-* Production smoke tests
+- Unit tests for critical logic
+- Model tests
+- Form tests where forms are introduced
+- View tests
+- Authentication tests
+- Permission tests
+- Lead-flow tests
+- Site-visit tests
+- Booking tests
+- Admin tests
+- Responsive tests
+- Browser tests
+- Security tests
+- Performance tests
+- SEO checks
+- Broken-link checks
+- Backup/restore tests
+- Production smoke tests
 
 Client/UAT testing should be performed before production launch.
 
@@ -570,23 +637,23 @@ Use GitHub from the beginning.
 
 Recommended practices:
 
-* Meaningful commits
-* `.gitignore`
-* Environment configuration
-* README
-* Documentation
-* Issue tracking
-* Feature branches when useful
-* Pull requests when appropriate
+- Meaningful commits
+- `.gitignore`
+- Environment configuration
+- README
+- Documentation
+- Issue tracking
+- Feature branches when useful
+- Pull requests when appropriate
 
 Never commit:
 
-* Secrets
-* API keys
-* Passwords
-* Production credentials
-* Private customer data
-* Sensitive business information
+- Secrets
+- API keys
+- Passwords
+- Production credentials
+- Private customer data
+- Sensitive business information
 
 ---
 
@@ -594,9 +661,9 @@ Never commit:
 
 Maintain separate configurations for:
 
-* Development
-* Staging
-* Production
+- Development
+- Staging
+- Production
 
 Production should use:
 
@@ -610,9 +677,9 @@ Secrets should be stored outside source control.
 
 Production backups should include:
 
-* Database
-* Important media
-* Required configuration information
+- Database
+- Important media
+- Required configuration information
 
 Backups must also be periodically tested by performing a restore procedure.
 
@@ -626,21 +693,21 @@ Development should initially aim for:
 
 Use:
 
-* Local development
-* GitHub
-* Free/low-cost development tools
-* Existing domain
-* Free or low-cost services where practical
+- Local development
+- GitHub
+- Free/low-cost development tools
+- Existing domain
+- Free or low-cost services where practical
 
 Production costs will depend on:
 
-* Hosting
-* Database
-* Storage
-* Email
-* WhatsApp/API usage
-* Automation services
-* Traffic
+- Hosting
+- Database
+- Storage
+- Email
+- WhatsApp/API usage
+- Automation services
+- Traffic
 
 Do not purchase infrastructure before it is needed.
 
@@ -654,15 +721,15 @@ Simple single-application architecture.
 
 Future growth may introduce:
 
-* Better hosting
-* Managed database
-* Cloud storage
-* CDN
-* Caching
-* Background workers
-* API integrations
-* CRM
-* Multiple sales agents
+- Better hosting
+- Managed database
+- Cloud storage
+- CDN
+- Caching
+- Background workers
+- API integrations
+- CRM
+- Multiple sales agents
 
 Only introduce these components when business requirements justify them.
 
@@ -678,15 +745,21 @@ Rule:
 
 > Need → Create → Use → Maintain
 
+Current documentation:
+
+- `README.md`
+- `docs/requirements.md`
+- `docs/planning.md`
+- `docs/design.md`
+
 Potential future documentation files may include:
 
-* `design.md`
-* `database.md`
-* `testing.md`
-* `deployment.md`
-* `security.md`
-* `api.md`
-* `user-guide.md`
+- `database.md`
+- `testing.md`
+- `deployment.md`
+- `security.md`
+- `api.md`
+- `user-guide.md`
 
 These should be created only when the relevant phase requires them.
 
@@ -698,12 +771,14 @@ Requirement Analysis: **Completed**
 
 Planning: **Completed**
 
-Design: **Next**
+Design: **Completed**
 
-Implementation: **Pending**
+Implementation: **In Progress**
 
 Testing: **Pending**
 
 Deployment: **Pending**
 
 Maintenance: **Pending**
+
+The current implementation priority is to review, test and stabilize the existing Django business foundation before adding further functionality.

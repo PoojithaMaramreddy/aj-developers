@@ -44,7 +44,6 @@ def project_detail(request, slug):
             "videos",
             "amenities",
             "approvals",
-            "plots",
         ),
         slug=slug,
         status="PUBLISHED",
@@ -58,7 +57,6 @@ def project_detail(request, slug):
 
 
 def project_enquiry(request, slug):
-
     project = get_object_or_404(
         Project,
         slug=slug,
@@ -82,11 +80,6 @@ def project_enquiry(request, slug):
             "",
         ).strip()
 
-        interested_plot_id = request.POST.get(
-            "interested_plot",
-            "",
-        ).strip()
-
         message = request.POST.get(
             "message",
             "",
@@ -98,7 +91,6 @@ def project_enquiry(request, slug):
 
         # Basic validation
         if not name or not phone:
-
             return render(
                 request,
                 "core/project_detail.html",
@@ -107,16 +99,6 @@ def project_enquiry(request, slug):
                     "enquiry_error":
                         "Please enter your name and phone number.",
                 },
-            )
-
-        interested_plot = None
-
-        if interested_plot_id:
-
-            interested_plot = (
-                project.plots
-                .filter(id=interested_plot_id)
-                .first()
             )
 
         # Find existing lead using phone + project
@@ -139,7 +121,6 @@ def project_enquiry(request, slug):
                 email=email,
                 source="WEBSITE",
                 interested_project=project,
-                interested_plot=interested_plot,
                 message=message,
                 status="NEW",
                 whatsapp_opt_in=whatsapp_opt_in,
@@ -152,9 +133,6 @@ def project_enquiry(request, slug):
 
             if email and not lead.email:
                 lead.email = email
-
-            if interested_plot:
-                lead.interested_plot = interested_plot
 
             if message:
                 lead.message = message
@@ -177,7 +155,6 @@ def project_enquiry(request, slug):
 
 
 def project_site_visit(request, slug):
-
     project = get_object_or_404(
         Project,
         slug=slug,
@@ -218,7 +195,6 @@ def project_site_visit(request, slug):
 
         # Basic validation
         if not name or not phone or not preferred_date:
-
             return render(
                 request,
                 "core/project_detail.html",
@@ -290,7 +266,6 @@ def project_site_visit(request, slug):
 
 
 def project_booking_request(request, slug):
-
     project = get_object_or_404(
         Project,
         slug=slug,
@@ -321,7 +296,6 @@ def project_booking_request(request, slug):
 
         # Basic validation
         if not name or not phone:
-
             return render(
                 request,
                 "core/project_detail.html",
@@ -382,7 +356,6 @@ def project_booking_request(request, slug):
         )
 
         if existing_booking:
-
             return redirect(
                 f"{reverse('project_detail', args=[project.slug])}"
                 "?booking=already_requested"
@@ -402,5 +375,5 @@ def project_booking_request(request, slug):
 
     return redirect(
         "project_detail",
-        slug=project.slug,
+        slug=slug,
     )

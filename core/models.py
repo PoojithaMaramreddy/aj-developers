@@ -219,53 +219,6 @@ class ProjectApproval(models.Model):
         return f"{self.project.name} - {self.approval_type}"
 
 
-class Plot(models.Model):
-    project = models.ForeignKey(
-        Project,
-        on_delete=models.CASCADE,
-        related_name="plots",
-    )
-
-    plot_number = models.CharField(
-        max_length=50,
-    )
-
-    plot_size = models.CharField(
-        max_length=100,
-        blank=True,
-    )
-
-    dimension = models.CharField(
-        max_length=100,
-        blank=True,
-    )
-
-    facing = models.CharField(
-        max_length=50,
-        blank=True,
-    )
-
-    block = models.CharField(
-        max_length=50,
-        blank=True,
-    )
-
-    layout_position = models.CharField(
-        max_length=100,
-        blank=True,
-    )
-
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-    )
-
-    class Meta:
-        ordering = ["plot_number"]
-
-    def __str__(self):
-        return f"{self.project.name} - Plot {self.plot_number}"
-
-
 class Lead(models.Model):
     STATUS_CHOICES = [
         ("NEW", "New"),
@@ -304,14 +257,6 @@ class Lead(models.Model):
 
     interested_project = models.ForeignKey(
         Project,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="leads",
-    )
-
-    interested_plot = models.ForeignKey(
-        Plot,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -432,15 +377,6 @@ class BookingRequest(models.Model):
         on_delete=models.CASCADE,
         related_name="booking_requests",
     )
-
-    plot = models.ForeignKey(
-        Plot,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="booking_requests",
-    )
-
     message = models.TextField(
         blank=True,
     )
