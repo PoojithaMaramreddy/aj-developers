@@ -2,264 +2,217 @@
 
 ## Real Estate Sales & Lead Management Platform
 
-AJ Developers is a real-world real estate web platform focused initially on open-plot projects in Hyderabad and surrounding areas.
-
-The platform is designed to support property discovery, lead generation, site visits, booking requests, sales follow-up, communication and future automation.
-
-It is also being developed as a professional portfolio and GitHub project.
+AJ Developers is a real estate web platform for open-plot projects in Hyderabad and surrounding areas. Visitors can browse projects, send enquiries, request site visits and submit booking requests. The team manages all content, leads and follow-ups from the Django Admin.
 
 ---
 
-## Project Objectives
+## Features
 
-- Build a professional real estate website for AJ Developers.
-- Showcase current and future property projects.
-- Generate and manage customer leads.
-- Allow customers to enquire about projects and individual plots.
-- Allow customers to request site visits.
-- Allow customers to submit booking requests.
-- Integrate WhatsApp as a primary communication channel.
-- Provide an admin interface for business operations.
-- Support future automation, analytics and CRM integration.
-- Keep the architecture simple, maintainable and scalable.
+### Public website
+
+- **Home page** with hero section, property categories, featured projects, about and contact sections.
+- **Project listing** showing all published projects.
+- **Project detail pages** with:
+  - Hero image, location, total area and total plots
+  - Image gallery and YouTube video links
+  - Amenities
+  - Approvals and legal documents
+  - Layout image / layout PDF and downloadable brochure
+  - Google Maps link
+- **Enquiry form**, **site visit request form** and **booking request form** on every project page.
+- **Click-to-call and WhatsApp buttons** across the site, with project-specific prefilled WhatsApp messages.
+- Responsive, mobile-first layout built with custom HTML and CSS.
+
+### Lead management (Django Admin)
+
+- **Automatic lead creation** from website forms, with the source set to `WEBSITE`.
+- **Duplicate protection:** one lead per phone number and project. A repeat submission updates the existing lead instead of creating a new one, and never overwrites the original name or resets its status.
+- **Status tracking:** New → Contacted → Interested → Site Visit Scheduled → Site Visit Done → Booking Requested → Booked → Closed / Not Interested.
+- **Site visits and booking requests** linked to leads, each with their own status workflow.
+- **Sales agents and follow-ups:** assign follow-ups (call, WhatsApp, site visit, email) with date, notes and status.
+- **WhatsApp opt-in** captured on the enquiry form.
+- Leads, site visits, booking requests and follow-ups can be searched and filtered in the admin.
+
+### Content management (Django Admin)
+
+Projects are data, not code. A new project is added entirely through the admin: details, images, videos, amenities, approvals and plots are all edited inline on the project page. Projects have `Draft`, `Published` and `Archived` states, and only published projects appear on the website.
+
+### Data models in place for future automation
+
+`Campaign` and `CampaignRecipient` models exist and can be managed in the admin, but **messages are not sent automatically yet** (see [Roadmap](#roadmap)).
 
 ---
 
-## Current Business Scope
+## Business Rules
 
-### Current Property Type
+- **No public pricing.** Customers contact AJ Developers for current prices.
+- **No public plot availability.** The site does not show Available, Reserved or Sold status. Availability is confirmed by the team.
+- **Booking requests, not online payments.** The booking flow is:
 
-- Open Plots
-
-### Future Property Types
-
-- Villas
-- Apartments
-- Commercial Spaces
-- Other property categories
-
-### Current Projects
-
-- 6 ventures initially
-
-The system must support adding more projects without requiring code changes for normal project content management.
-
----
-
-## Project Lifecycle
-
-1. Requirement Analysis — Completed
-2. Planning — Completed
-3. Design — Completed
-4. Implementation — In Progress
-5. Testing — Pending
-6. Deployment — Pending
-7. Maintenance — Pending
+  `Book This Plot → Submit Details → Booking Request → AJ Developers Contact → Confirmation & Documentation`
 
 ---
 
 ## Technology Stack
 
-### Backend
+| Layer | Technology |
+|-------|------------|
+| Backend | Python, Django 5.2, Django ORM |
+| Database | MySQL |
+| Frontend | Django templates, custom CSS, JavaScript, Font Awesome |
+| Config | `django-environ` (`.env` file) |
+| Images | Pillow |
+| Version control | Git, GitHub |
 
-- Python
-- Django
-- Django ORM
+---
 
-### Database
+## Project Structure
 
-- MySQL
+```
+aj-developers/
+├── config/              # Django project settings, URLs, WSGI/ASGI
+├── core/                # Main app: models, views, admin, migrations
+├── templates/
+│   ├── base.html        # Shared layout (navbar, footer)
+│   └── core/            # home, projects, project_detail
+├── static/              # CSS and site images
+├── projects/images/     # Project image assets
+├── docs/                # requirements.md, planning.md, design.md
+├── .env.example         # Environment variable template
+├── manage.py
+└── requirements.txt
+```
 
-### Frontend
+### URLs
 
-- HTML
-- CSS
-- Bootstrap
-- JavaScript where required
+| URL | Purpose |
+|-----|---------|
+| `/` | Home page |
+| `/projects/` | Published projects |
+| `/projects/<slug>/` | Project detail |
+| `/projects/<slug>/enquiry/` | Enquiry form submission (POST) |
+| `/projects/<slug>/site-visit/` | Site visit request submission (POST) |
+| `/projects/<slug>/booking-request/` | Booking request submission (POST) |
+| `/admin/` | Django Admin |
 
-### Development & Version Control
+---
 
+## Local Setup
+
+### Prerequisites
+
+- Python 3.10+
+- MySQL 8+
 - Git
-- GitHub
 
-### Integrations & Future Technologies
+### Steps
 
-- REST APIs
-- WhatsApp integration
-- Automation platforms
-- Managed services
-- Analytics
-- CRM integrations
+```bash
+# 1. Clone the repository
+git clone https://github.com/PoojithaMaramreddy/aj-developers.git
+cd aj-developers
 
-The project follows a pragmatic technology strategy.
+# 2. Create and activate a virtual environment
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
-AI tools, APIs, automation platforms, plugins, managed services and third-party services may be used whenever they provide practical value and reduce unnecessary custom development.
+# 3. Install dependencies
+pip install -r requirements.txt
 
-The project should avoid unnecessary complexity and overengineering.
+# 4. Create the MySQL database
+mysql -u root -p -e "CREATE DATABASE ajdevelopers CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
----
+# 5. Configure environment variables
+cp .env.example .env             # then edit .env with your values
 
-## Current Implementation Status
+# 6. Apply migrations
+python manage.py migrate
 
-The initial Django and database foundation has been completed.
+# 7. Create an admin user
+python manage.py createsuperuser
 
-### Completed
+# 8. Run the development server
+python manage.py runserver
+```
 
-- Python development environment setup
-- Virtual environment setup
-- Django project setup
-- Django 5.2.17 configured
-- MySQL database configured
-- Django ORM configured
-- Environment variable configuration using `.env`
-- `.env.example` added
-- Git repository initialized
-- GitHub repository connected
-- Initial project pushed to GitHub
-- `core` Django application created
-- `Project` model created
-- Project model migration created and applied
-- Django Admin configured
-- Project management through Django Admin tested
-- Basic Django ORM operations tested
+Open http://127.0.0.1:8000/ for the site and http://127.0.0.1:8000/admin/ for the admin.
 
-### Currently Working On
-
-- Reviewing and finalizing the `Project` data model
-- Creating project-related models
-- Building the project management foundation
-
-### Not Yet Implemented
-
-- Public website frontend
-- Project listing pages
-- Project detail pages
-- Project image/gallery management
-- Project videos
-- Amenities
-- Approvals and legal documents
-- Plot enquiry workflow
-- Lead management
-- Site visit requests
-- Booking requests
-- WhatsApp integration
-- Sales follow-up system
-- Campaign management
-- Analytics dashboard
-- Production deployment
+Projects appear on the website only when their status is set to **Published**.
 
 ---
 
-## Architecture Principles
+## Environment Variables
 
-### Data-Driven Projects
+Set these in `.env` (never commit this file).
 
-The six current ventures are treated as data, not separate code.
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `DB_NAME` | Yes | MySQL database name |
+| `DB_USER` | Yes | MySQL username |
+| `DB_PASSWORD` | Yes | MySQL password |
+| `DB_HOST` | Yes | Database host (e.g. `127.0.0.1`) |
+| `DB_PORT` | Yes | Database port (e.g. `3306`) |
+| `SECRET_KEY` | Production | Django secret key. Falls back to an insecure development key if unset. |
+| `DEBUG` | Production | Defaults to `True`. Set to `False` in production. |
+| `ALLOWED_HOSTS` | Production | Comma-separated hostnames, e.g. `example.com,www.example.com` |
+| `EMAIL_BACKEND` | Optional | Defaults to the console backend |
 
-Adding a future project should normally be possible through the admin interface without modifying application code.
+When `DEBUG=False`, the app automatically enables HTTPS redirect, secure cookies, HSTS and related security headers.
 
-### ORM-Based Database Access
+---
 
-Django ORM is used for application-level database operations.
+## Production Notes
 
-The system should avoid unnecessary raw SQL and use efficient ORM queries where practical.
+Before deploying:
 
-### No Public Pricing
-
-Project pricing will not be publicly displayed.
-
-Customers can contact AJ Developers for current pricing and project information.
-
-### No Public Plot Availability
-
-The website will not expose public Available, Reserved or Sold plot status in Phase 1.
-
-Customers can enquire about a specific plot or submit a booking request.
-
-Current availability will be confirmed by AJ Developers.
-
-### Booking Requests
-
-Phase 1 supports booking requests rather than online payment or automatic booking confirmation.
-
-Booking flow:
-
-Select Plot → Book This Plot → Submit Details → Booking Request → AJ Developers Contact → Confirmation & Documentation
+1. Set `DEBUG=False`, a strong `SECRET_KEY`, and `ALLOWED_HOSTS` for your domain.
+2. Run `python manage.py check --deploy` and fix any warnings.
+3. Run `python manage.py collectstatic`. Static files are collected into `staticfiles/`.
+4. Serve static files (for example with WhiteNoise or Nginx) and run the app with a WSGI server such as Gunicorn. These are not included in `requirements.txt` yet.
+5. Uploaded files (brochures, layouts, project images, approval documents) are stored in `media/`. Django only serves media in development (`DEBUG=True`), so configure your web server or object storage to serve it in production, and keep it on persistent storage.
+6. Use a managed or regularly backed-up MySQL database.
+7. Make sure `.env` is never committed.
 
 ---
 
 ## Documentation
 
-Project documentation is maintained inside the `docs/` directory.
-
-Current documentation:
+Detailed project documentation lives in `docs/`:
 
 - `docs/requirements.md`
 - `docs/planning.md`
 - `docs/design.md`
 
-Additional documentation files will be created only when they become necessary.
+---
 
-Documentation principle:
+## Project Status
 
-> Need → Create → Use → Maintain
+| Phase | Status |
+|-------|--------|
+| Requirement analysis | Completed |
+| Planning | Completed |
+| Design | Completed |
+| Implementation | Completed |
+| Testing | Pending (no automated tests yet) |
+| Deployment | Pending |
+| Maintenance | Pending |
+
+---
+
+## Roadmap
+
+Planned for future phases:
+
+- WhatsApp Business API integration and automated campaign sending
+- Automated follow-up reminders and lead notifications
+- Spam protection and rate limiting on public forms
+- Automated tests
+- Analytics dashboard
+- CRM integrations
+- Additional property types: villas, apartments, commercial spaces
 
 ---
 
 ## Development Philosophy
 
-Build a reliable and practical system first.
-
-Do not build infrastructure or features simply because they are technically possible.
-
-Features should be added when they provide real business value, improve the customer experience, improve maintainability, or provide meaningful portfolio value.
-
-The system should remain simple during the initial development stages and evolve as real business requirements grow.
-
----
-
-## Responsive Design
-
-The website is intended to provide a single responsive experience across:
-
-- Mobile phones
-- Tablets
-- Laptops
-- Desktop computers
-- Large screens
-
-The design will follow a mobile-first approach with:
-
-- Touch-friendly interfaces
-- Simple enquiry forms
-- Click-to-call functionality
-- WhatsApp integration
-- Site visit actions
-- Mobile-friendly navigation
-- Responsive images
-- Basic accessibility considerations
-
----
-
-## Customer Journey
-
-The planned customer journey is:
-
-```text
-Website
-   ↓
-Project Discovery
-   ↓
-Project Details
-   ↓
-Enquiry / WhatsApp / Call
-   ↓
-Lead Created
-   ↓
-Follow-up
-   ↓
-Site Visit
-   ↓
-Booking Request
-   ↓
-Documentation & Confirmation
+Build a reliable and practical system first. Add features when they provide real business value, improve the customer experience or improve maintainability, not simply because they are technically possible. Keep the architecture simple and let it evolve with real business needs.
