@@ -1,111 +1,123 @@
-# AJ Developers
 
-## Real Estate Sales & Lead Management Platform
+# AJ Developers — Real Estate Sales & Lead Management Platform
 
-AJ Developers is a real estate web platform for open-plot projects in Hyderabad and surrounding areas. Visitors can browse projects, send enquiries, request site visits and submit booking requests. The team manages project content, leads and follow-ups through Django Admin.
+AJ Developers is a full-stack real estate web application built using **Python, Django, MySQL, HTML, CSS, and JavaScript**.
 
----
+The platform allows visitors to explore real estate projects, submit enquiries, request site visits, and send booking requests. It also provides an internal lead management workflow through Django Admin, helping the team organize customer enquiries, track follow-ups, and manage project information.
 
-## Features
+**Project Status:** Core implementation completed | Automated testing and deployment pending
 
-### Public website
+## Tech Stack
 
-- **Home page** with hero section, property categories, featured projects, about and contact sections.
-- **Project listing** showing all published projects.
-- **Project detail pages** with:
-  - Hero image, location, total area and project-level number of plots where applicable
-  - Image gallery and YouTube video links
-  - Amenities
-  - Approvals and legal documents
-  - Layout image / layout PDF and downloadable brochure
-  - Google Maps link
-- **Enquiry form**, **site visit request form** and **booking request form** on every project page.
-- **Click-to-call and WhatsApp buttons** across the site, with project-specific prefilled WhatsApp messages.
-- Responsive, mobile-first layout built with custom HTML and CSS.
-
-### Lead management (Django Admin)
-
-- **Automatic lead creation** from website forms, with the source set to `WEBSITE`.
-- **Duplicate protection:** one lead per phone number and project. A repeat submission updates the existing lead instead of creating a new one, and never overwrites the original name or resets its status.
-- **Status tracking:** New → Contacted → Interested → Site Visit Scheduled → Site Visit Done → Booking Requested → Booked → Closed / Not Interested.
-- **Site visits and booking requests** linked to leads, each with their own status workflow.
-- **Sales agents and follow-ups:** assign follow-ups such as calls, WhatsApp messages, site visits and emails with date, notes and status.
-- **WhatsApp opt-in** captured on the enquiry form.
-- Leads, site visits, booking requests and follow-ups can be searched and filtered in the admin.
-
-### Content management (Django Admin)
-
-Projects are data, not code. A new project is added entirely through the admin: details, images, videos, amenities and approvals are managed from the project page.
-
-Projects have `Draft`, `Published` and `Archived` states, and only published projects appear on the website.
-
-The platform does **not** manage individual plot records, plot inventory, plot numbers or individual plot selection.
-
-### Data models in place for future automation
-
-`Campaign` and `CampaignRecipient` models exist and can be managed in the admin, but **messages are not sent automatically yet**.
-
----
-
-## Business Rules
-
-- **No public pricing.** Customers contact AJ Developers for current prices.
-- **No individual plot inventory management.** The system does not manage individual plot records or show individual plot availability such as Available, Reserved or Sold. Project availability is confirmed by the AJ Developers team.
-- **Booking requests, not online payments.** The booking flow is:
-
-  `Select Project → Submit Details → Booking Request → AJ Developers Contact → Confirmation & Documentation`
-
-- Project-level information such as the **number of plots in a development** may be displayed as descriptive project information where applicable. It is not used as individual plot inventory.
-
----
-
-## Technology Stack
-
-| Layer | Technology |
-|-------|------------|
+| Layer | Technologies |
+|-------|-------------|
 | Backend | Python, Django 5.2, Django ORM |
 | Database | MySQL |
-| Frontend | Django templates, custom CSS, JavaScript, Font Awesome |
-| Config | `django-environ` (`.env` file) |
-| Images | Pillow |
-| Version control | Git, GitHub |
+| Frontend | HTML, CSS, JavaScript, Django Templates |
+| Configuration | django-environ |
+| Image Processing | Pillow |
+| Version Control | Git, GitHub |
 
----
+## Key Features
+
+### 1. Property Listings and Project Management
+
+- Display published real estate projects.
+- View project details, locations, images, amenities, and brochures.
+- Access layout documents and Google Maps links.
+- Manage project information through Django Admin.
+- Support Draft, Published, and Archived project statuses.
+- Display only published projects on the public website.
+
+### 2. Customer Enquiries and Booking Requests
+
+- Submit enquiries for individual projects.
+- Request property site visits.
+- Submit booking requests.
+- Use click-to-call and WhatsApp contact options.
+- Associate submitted requests with the relevant real estate project.
+
+Booking requests are handled by the sales team. The platform does not process online payments.
+
+### 3. Lead Management
+
+- Automatically create leads from website enquiries.
+- Associate leads with their respective projects.
+- Prevent duplicate leads for the same phone number and project.
+- Update repeat enquiries without overwriting the original customer name or resetting lead status.
+- Track leads through multiple sales stages.
+- Search and filter lead records through Django Admin.
+
+### 4. Sales Follow-up Management
+
+- Track customer follow-up activities.
+- Record calls, WhatsApp messages, site visits, and emails.
+- Assign follow-ups to sales agents.
+- Maintain follow-up dates, notes, and statuses.
+- Link site visits and booking requests to customer leads.
+
+### 5. Responsive User Interface
+
+- Responsive layouts for desktop and mobile devices.
+- Project listing and project detail pages.
+- Image galleries and downloadable project documents.
+- Enquiry, site visit, and booking request forms.
+
+## Application Workflow
+
+### Customer Journey
+
+1. A visitor opens the website.
+2. The visitor explores available real estate projects.
+3. The visitor selects a project and views its details.
+4. The visitor submits an enquiry, site visit request, or booking request.
+5. The system records the request and associates it with a lead.
+6. The sales team reviews and follows up through Django Admin.
+
+### Administrative Workflow
+
+1. Create or update real estate project information.
+2. Publish projects for public viewing.
+3. Review customer enquiries and requests.
+4. Track lead statuses.
+5. Assign and manage follow-up activities.
+6. Update site visit and booking request statuses.
+
+## Important Business Rules
+
+- Project prices are not displayed publicly.
+- Booking requests do not involve online payments.
+- Individual plot inventory and plot selection are not managed by the system.
+- Project availability is confirmed by the sales team.
+- Campaign and campaign-recipient models exist, but automated message sending is not implemented.
+
+## Application Architecture
+
+The application follows Django's Model-View-Template architecture.
+
+- **Models:** Represent real estate projects, leads, enquiries, site visits, booking requests, and related records.
+- **Views:** Handle application requests, business logic, and form submissions.
+- **Templates:** Render the public-facing website.
+- **Django Admin:** Provides internal project and lead management interfaces.
+- **MySQL:** Stores application data using Django ORM.
 
 ## Project Structure
 
 ```text
 aj-developers/
-├── config/              # Django project settings, URLs, WSGI/ASGI
-├── core/                # Main app: models, views, admin, migrations
-├── templates/
-│   ├── base.html        # Shared layout (navbar, footer)
-│   └── core/            # Home, projects and project detail templates
-├── static/              # CSS and site assets
+├── config/              # Django settings, URLs and application configuration
+├── core/                # Models, views, admin configuration and migrations
+├── templates/           # Django HTML templates
+├── static/              # CSS, JavaScript and static assets
 ├── projects/images/     # Project image assets
 ├── docs/                # Requirements, planning and design documentation
 ├── .env.example         # Environment variable template
 ├── manage.py
-└── requirements.txt
+├── requirements.txt
+└── README.md
 ```
 
----
-
-## URLs
-
-| URL | Purpose |
-|-----|---------|
-| `/` | Home page |
-| `/projects/` | Published projects |
-| `/projects/<slug>/` | Project detail |
-| `/projects/<slug>/enquiry/` | Enquiry form submission (POST) |
-| `/projects/<slug>/site-visit/` | Site visit request submission (POST) |
-| `/projects/<slug>/booking-request/` | Booking request submission (POST) |
-| `/admin/` | Django Admin |
-
----
-
-## Local Setup
+## Local Installation
 
 ### Prerequisites
 
@@ -113,136 +125,129 @@ aj-developers/
 - MySQL 8+
 - Git
 
-### Steps
+### 1. Clone the Repository
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/PoojithaMaramreddy/aj-developers.git
 cd aj-developers
+```
 
-# 2. Create and activate a virtual environment
+### 2. Create a Virtual Environment
+
+```bash
 python -m venv .venv
-source .venv/Scripts/activate        # Windows
-# source .venv/bin/activate          # macOS/Linux
+```
 
-# 3. Install dependencies
+Activate it on Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+Or on macOS/Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+### 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-# 4. Create the MySQL database
-mysql -u root -p -e "CREATE DATABASE ajdevelopers CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+### 4. Configure MySQL
 
-# 5. Configure environment variables
-copy .env.example .env               # Windows
-# cp .env.example .env               # macOS/Linux
-# Then edit .env with your values
+Create a MySQL database named `ajdevelopers`, or configure another database name through environment variables.
 
-# 6. Apply migrations
+### 5. Configure Environment Variables
+
+Copy `.env.example` to `.env` and configure:
+
+- DB_NAME
+- DB_USER
+- DB_PASSWORD
+- DB_HOST
+- DB_PORT
+- SECRET_KEY
+- DEBUG
+- ALLOWED_HOSTS
+
+Never commit the `.env` file or real credentials.
+
+### 6. Apply Database Migrations
+
+```bash
 python manage.py migrate
+```
 
-# 7. Create an admin user
+### 7. Create an Admin User
+
+```bash
 python manage.py createsuperuser
+```
 
-# 8. Run the development server
+### 8. Start the Development Server
+
+```bash
 python manage.py runserver
 ```
 
-Open `http://127.0.0.1:8000/` for the site and `http://127.0.0.1:8000/admin/` for the admin.
+Open:
 
-Projects appear on the website only when their status is set to **Published**.
+- Website: http://127.0.0.1:8000/
+- Django Admin: http://127.0.0.1:8000/admin/
 
----
+Projects must be marked as Published to appear on the public website.
 
-## Environment Variables
+## Testing and Deployment Status
 
-Set these in `.env`. **Never commit this file.**
+| Development Phase | Status |
+|-------------------|--------|
+| Requirements Analysis | Completed |
+| Planning and Design | Completed |
+| Core Application Development | Completed |
+| Automated Testing | Pending |
+| Production Deployment | Pending |
+| Maintenance | Not started |
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `DB_NAME` | Yes | MySQL database name |
-| `DB_USER` | Yes | MySQL username |
-| `DB_PASSWORD` | Yes | MySQL password |
-| `DB_HOST` | Yes | Database host, for example `127.0.0.1` |
-| `DB_PORT` | Yes | Database port, for example `3306` |
-| `SECRET_KEY` | Production | Django secret key |
-| `DEBUG` | Production | Defaults to `True`; set to `False` in production |
-| `ALLOWED_HOSTS` | Production | Comma-separated hostnames |
-| `EMAIL_BACKEND` | Optional | Defaults to the console backend |
+**Deployment:** The application currently runs in a local development environment. A public production URL is not yet available.
 
-When `DEBUG=False`, the application enables HTTPS redirect, secure cookies, HSTS and related security settings.
-
----
-
-## Production Notes
-
-Before deploying:
-
-1. Set `DEBUG=False`, a strong `SECRET_KEY`, and appropriate `ALLOWED_HOSTS`.
-2. Run:
-
-   ```bash
-   python manage.py check --deploy
-   ```
-
-   and address any warnings.
-3. Run:
-
-   ```bash
-   python manage.py collectstatic
-   ```
-
-4. Serve static files using an appropriate production setup such as WhiteNoise or Nginx.
-5. Run Django with a production WSGI server such as Gunicorn.
-6. Uploaded files such as brochures, layouts, project images and approval documents are stored in `media/`. Configure persistent storage and production media serving before deployment.
-7. Use a managed or regularly backed-up MySQL database.
-8. Make sure `.env` is never committed.
-9. Configure domain, HTTPS, email and other production services before going live.
-
----
+Before production deployment, the application requires appropriate Django security settings, production static and media storage, a hosted MySQL database, and deployment validation.
 
 ## Documentation
 
-Detailed project documentation lives in `docs/`:
+Additional project documentation is available in the `docs/` directory:
 
 - `docs/requirements.md`
 - `docs/planning.md`
 - `docs/design.md`
 
----
+## Future Enhancements
 
-## Project Status
+- Automated testing for models, views, and form submissions
+- Production deployment
+- Automated follow-up reminders
+- WhatsApp Business API integration
+- Lead analytics dashboard
+- Spam protection and rate limiting
+- Additional real estate property categories
 
-| Phase | Status |
-|-------|--------|
-| Requirement analysis | Completed |
-| Planning | Completed |
-| Design | Completed |
-| Implementation | Completed |
-| Testing | Pending — automated test coverage is not yet implemented |
-| Deployment | Pending |
-| Maintenance | Pending |
+## Skills Demonstrated
 
----
+- Python and Django web development
+- Django ORM and MySQL integration
+- Database-backed application development
+- Model-View-Template architecture
+- CRUD operations
+- Form processing and validation
+- Lead management and business workflow implementation
+- Django Admin customization
+- Responsive frontend development
+- Git and GitHub version control
 
-## Roadmap
+## Project Summary
 
-Planned for future phases:
+AJ Developers demonstrates the development of a database-driven real estate application that connects public property listings and customer enquiries with internal lead management workflows.
 
-- WhatsApp Business API integration and automated campaign sending
-- Automated follow-up reminders and lead notifications
-- Spam protection and rate limiting on public forms
-- Automated tests
-- Analytics dashboard
-- CRM integrations
-- Additional property types such as villas, apartments and commercial spaces
-
----
-
-## Development Philosophy
-
-Build a reliable and practical system first.
-
-Add features when they provide real business value, improve the customer experience or improve maintainability—not simply because they are technically possible.
-
-Use technology, AI and automation where they provide clear value. Prefer simple, maintainable solutions and use no-code or low-code tools where appropriate instead of adding unnecessary custom code.
-
-Keep the architecture simple and let the platform evolve with real business needs.
+The core application is implemented, while automated testing and public deployment remain planned improvements.
